@@ -3,10 +3,14 @@
     padding: 0;
 }
 
+body{
+    background-color: #5D3587;
+}
+
 .container-modificado{
     max-width: 600px;
     padding: 1.5rem;
-    background-color: #fff;
+    background-color: #F2F2F2;
     border-radius: 15px;
     border: 1px solid #BFBFBF;
 }
@@ -25,10 +29,20 @@
 }
 
 label{
-    font-weight: bold;
+    font-weight: 460;
 }
 
-#btn-modificado{
+.btn-modificado{
     font-weight: 500;
     border: 1px solid #BFBFBF;
+}
+
+#resultado_atingiu_meta{
+    height: 100px;
+    color: green;
+}
+
+#resultado_nao_atingiu_meta{
+    height: 100px;
+    color: red;
 }

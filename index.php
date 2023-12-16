@@ -197,7 +197,7 @@
                 </div>
                 
                 <div class="d-flex justify-content-center mt-3">
-                    <button type="submit" id="btn-modificado" class="btn btn-primary w-100">Enviar</button>
+                    <button type="submit" class="btn btn-secondary w-100 btn-modificado">Enviar</button>
                 </div>
             </form>
         </div>
