@@ -1,20 +1,3 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- import bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-    
-    <!-- import css interno  -->
-    <link rel="stylesheet" href="style.css">
-    
-    <title>Classificação Vendedor</title>
-</head>
-
 <?php
 
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -1634,35 +1617,32 @@
             }
         }
     }
+
+include_once('_header.php');
 ?>
-<body>
-    <header class="navbar py-3"></header>
 
-    <main class="w-100 m-auto container-modificado">
-        <div class="resultado">
-            <div class="row text-center mb-4">
-                <h1 class="h3 mb-5">
-                    Vendedor: <?php echo $nome ?>
-                </h1>
-            </div>
+<div class="resultado">
+    <div class="row text-center mb-4">
+        <h1 class="h3 mb-5">
+            Vendedor: <?php echo $nome ?>
+        </h1>
+    </div>
 
-            <div class="form-floating">
-                <div class="text-center h1">
-                    <?php 
-                        if($atingiu_meta == 'Atingiu a Meta :)'){
-                            echo '<div id="resultado_atingiu_meta">' . $atingiu_meta . '</div>';
-                        }else{
-                            echo '<div id="resultado_nao_atingiu_meta">' . $atingiu_meta . '</div>';
-                        }
-                    ?>
-                </div>
-
-                <div class="mt-5">
-                    <a class="btn btn-secondary w-100 btn-modificado" href="index.php">Voltar</a>
-                </div>
-            </div>
+    <div class="form-floating">
+        <div class="text-center h1">
+            <?php 
+                if($atingiu_meta == 'Atingiu a Meta :)'){
+                    echo '<div id="resultado_atingiu_meta">' . $atingiu_meta . '</div>';
+                }else{
+                    echo '<div id="resultado_nao_atingiu_meta">' . $atingiu_meta . '</div>';
+                }
+            ?>
         </div>
-    </main>
 
-    <footer class="footer py-3"></footer>
-</body>
+        <div class="mt-5">
+            <a class="btn btn-secondary w-100 btn-modificado" href="index.php">Voltar</a>
+        </div>
+    </div>
+</div>
+
+<?php include_once('_footer.php'); ?>
