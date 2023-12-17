@@ -26,7 +26,7 @@
         </div>
 
         <div class="form-floating">
-            <form class="form-modificado" action="classificacao.php" method="post">
+            <form class="form-modificado" action="classificacao.php" method="post" autocomplete="off">
                 <div class="mb-3">
                     <label for="nome" class="mb-1">Nome:</label>
                     <input type="text" name="nome" class="form-control" required>

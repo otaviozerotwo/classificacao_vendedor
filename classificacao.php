@@ -89,14 +89,38 @@
             $cargo = 8;
         }
 
-        $meta_venda = floatval($_POST['meta_venda']);
-        $venda_real = floatval($_POST['venda_real']);
-        $margem_bruta = floatval($_POST['margem_bruta']);
-        $devolucao_real = floatval($_POST['devolucao_real']);
-        $meta_desconto_total = floatval($_POST['meta_desconto_total']);
-        $desconto_total_real = floatval($_POST['desconto_total_real']);
-        $meta_desconto_verba = floatval($_POST['meta_desconto_verba']);
-        $desconto_verba_real = floatval($_POST['desconto_verba_real']);
+        $meta_venda = $_POST['meta_venda'];
+        $meta_venda = str_replace(',', '.', $meta_venda);
+        $meta_venda = floatval($meta_venda);
+
+        $venda_real = $_POST['venda_real'];
+        $venda_real = str_replace(',', '.', $venda_real);
+        $venda_real = floatval($venda_real);
+
+        $margem_bruta = $_POST['margem_bruta'];
+        $margem_bruta = str_replace(',', '.', $margem_bruta);
+        $margem_bruta = floatval($margem_bruta);
+
+        $devolucao_real = $_POST['devolucao_real'];
+        $devolucao_real = str_replace(',', '.', $devolucao_real);
+        $devolucao_real = floatval($devolucao_real);
+
+        $meta_desconto_total = $_POST['meta_desconto_total'];
+        $meta_desconto_total = str_replace(',', '.', $meta_desconto_total);
+        $meta_desconto_total = floatval($meta_desconto_total);
+
+        $desconto_total_real = $_POST['desconto_total_real'];
+        $desconto_total_real = str_replace(',', '.', $desconto_total_real);
+        $desconto_total_real = floatval($desconto_total_real);
+
+        $meta_desconto_verba = $_POST['meta_desconto_verba'];
+        $meta_desconto_verba = str_replace(',','.', $meta_desconto_verba);
+        $meta_desconto_verba = floatval($meta_desconto_verba);
+
+        $desconto_verba_real = $_POST['desconto_verba_real'];
+        $desconto_verba_real = str_replace(',', '.', $desconto_verba_real);
+        $desconto_verba_real = floatval($desconto_verba_real);
+
         $meta_clientes = intval($_POST['meta_clientes']);
         $clientes_atendidos = intval($_POST['clientes_atendidos']);
         $meta_itens = intval($_POST['meta_itens']);
