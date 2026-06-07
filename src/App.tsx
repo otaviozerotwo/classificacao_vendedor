@@ -1,4 +1,5 @@
 import Header from './components/Header'
+import ProgressPanel from './components/ProgressPanel'
 import GlobalStyle, { Container } from './styles'
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
       <GlobalStyle />
       <Container>
         <Header />
+        <ProgressPanel />
       </Container>
     </>
   )
