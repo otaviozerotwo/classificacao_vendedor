@@ -1,15 +1,21 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  max-width: 1480px;
-  margin: 0 auto;
-  padding: 24px 0px;
+  background-color: #fff;
 
-  .flex {
+  > div {
     display: flex;
+    justify-content: center;
+    max-width: 1480px;
+    margin: 0 auto;
+    padding: 24px 0px;
+    gap: 14px;
   }
+`
+
+export const CardStep = styled.div`
+  display: flex;
+  margin-left: 14px;
 `
 
 export const Icon = styled.div`
@@ -18,9 +24,8 @@ export const Icon = styled.div`
   justify-content: center;
   height: 48px;
   width: 48px;
-  margin-left: 48px;
   margin-right: 16px;
-  background-color: #0f0f0fff;
+  background-color: #000;
   border-radius: 50%;
 `
 
@@ -33,9 +38,9 @@ export const Description = styled.p`
 `
 
 export const ProgressBar = styled.div`
-  background-color: #0f0f0fff;
+  background-color: #000;
   height: 8px;
-  margin-left: 12px;
+  width: 180px;
   border-radius: 8px;
   display: flex;
   align-self: center;

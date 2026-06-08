@@ -7,8 +7,18 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     font-family: Roboto, sans-serif;
   }
+
+  body {
+    background-color: #2c68a3ff;
+  }
 `
 
-export const Container = styled.div``
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+`
 
 export default GlobalStyle

@@ -4,7 +4,8 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   height: 72px;
-  border-bottom: solid 1px #ccc;
+  background-color: #fff;
+  border-bottom: solid 1px #000;
 `
 
 export const Logo = styled.div`
@@ -15,7 +16,7 @@ export const Logo = styled.div`
   width: 48px;
   margin-left: 48px;
   margin-right: 16px;
-  background-color: #0f0f0fff;
+  background-color: #000;
   border-radius: 14px;
 `
 
