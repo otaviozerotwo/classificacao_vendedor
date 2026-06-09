@@ -11,12 +11,38 @@ import {
 } from './styles'
 import { RiResetLeftLine } from 'react-icons/ri'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
+import { useFormik } from 'formik'
 
 type Step = 'basicInfos' | 'performanceMetrics' | 'resultClassification'
 
 const Home = () => {
   const [step, setStep] = useState<Step>('basicInfos')
   const isBackButtonDisabled = step === 'basicInfos'
+
+  const form = useFormik({
+    initialValues: {
+      fullName: '',
+      role: '',
+      sex: '',
+      city: '',
+      year: '',
+      month: '',
+      daysWorked: '',
+      salesTarget: '',
+      salesCompleted: '',
+      grossMargin: '',
+      salesReturned: '',
+      totalDiscountTarget: '',
+      totalDiscountCompleted: '',
+      budgetDiscountTarget: '',
+      budgetDiscountCompleted: '',
+      customersTarget: '',
+      customersServed: '',
+      itemTarget: '',
+      itemsSold: ''
+    },
+    onSubmit: () => {}
+  })
 
   const handleContinue = () => {
     setStep('performanceMetrics')
@@ -26,10 +52,14 @@ const Home = () => {
     setStep('basicInfos')
   }
 
+  const handleReset = () => {
+    form.resetForm()
+  }
+
   return (
     <Container>
       <div>
-        <form>
+        <form onSubmit={form.handleSubmit}>
           {step === 'basicInfos' ? (
             <>
               <h2>Informações Básicas do Vendedor</h2>
@@ -49,14 +79,19 @@ const Home = () => {
                       type="text"
                       name="fullName"
                       placeholder="Ex: José da Silva"
+                      value={form.values.fullName}
+                      onChange={form.handleChange}
                     />
                   </InputGroup>
                   <InputGroup>
                     <label htmlFor="role">CARGO</label>
-                    <select name="role" id="role">
-                      <option value="" disabled selected hidden>
-                        Selecione um cargo
-                      </option>
+                    <select
+                      name="role"
+                      id="role"
+                      value={form.values.role}
+                      onChange={form.handleChange}
+                    >
+                      <option value="">Selecione um cargo</option>
                       <option value="atendenteFarmacia">
                         Atendente de Farmácia
                       </option>
@@ -80,10 +115,13 @@ const Home = () => {
                   </InputGroup>
                   <InputGroup>
                     <label htmlFor="sex">SEXO</label>
-                    <select name="sex" id="sex">
-                      <option value="" disabled selected hidden>
-                        Selecione o sexo
-                      </option>
+                    <select
+                      name="sex"
+                      id="sex"
+                      value={form.values.sex}
+                      onChange={form.handleChange}
+                    >
+                      <option value="">Selecione o sexo</option>
                       <option value="male">Masculino</option>
                       <option value="female">Feminino</option>
                     </select>
@@ -95,10 +133,13 @@ const Home = () => {
                   </CardTitle>
                   <InputGroup>
                     <label htmlFor="city">CIDADE</label>
-                    <select name="city" id="city">
-                      <option value="" disabled selected hidden>
-                        Selecione uma cidade
-                      </option>
+                    <select
+                      name="city"
+                      id="city"
+                      value={form.values.city}
+                      onChange={form.handleChange}
+                    >
+                      <option value="">Selecione uma cidade</option>
                       <option value="araxa">Araxá</option>
                       <option value="carmoParanaiba">Carmo do Paranaíba</option>
                       <option value="conceicaoAlagoas">
@@ -137,6 +178,8 @@ const Home = () => {
                         min={2014}
                         placeholder="2026"
                         style={{ width: '84px' }}
+                        value={form.values.year}
+                        onChange={form.handleChange}
                       />
                     </InputGroup>
                     <InputGroup>
@@ -149,6 +192,8 @@ const Home = () => {
                         max={12}
                         placeholder="01"
                         style={{ width: '84px' }}
+                        value={form.values.month}
+                        onChange={form.handleChange}
                       />
                     </InputGroup>
                   </Row>
@@ -162,6 +207,8 @@ const Home = () => {
                       min={1}
                       placeholder="Ex: 15"
                       style={{ width: '192px' }}
+                      value={form.values.daysWorked}
+                      onChange={form.handleChange}
                     />
                   </InputGroup>
                 </Card>
@@ -187,6 +234,8 @@ const Home = () => {
                         id="salesTarget"
                         name="salesTarget"
                         min={1}
+                        value={form.values.salesTarget}
+                        onChange={form.handleChange}
                       />
                     </InputGroup>
                     <InputGroup>
@@ -196,6 +245,8 @@ const Home = () => {
                         id="salesCompleted"
                         name="salesCompleted"
                         min={1}
+                        value={form.values.salesCompleted}
+                        onChange={form.handleChange}
                       />
                     </InputGroup>
                   </Row>
@@ -206,6 +257,8 @@ const Home = () => {
                       id="grossMargin"
                       name="grossMargin"
                       min={1}
+                      value={form.values.grossMargin}
+                      onChange={form.handleChange}
                     />
                   </InputGroup>
                   <InputGroup>
@@ -215,6 +268,8 @@ const Home = () => {
                       id="salesReturned"
                       name="salesReturned"
                       min={1}
+                      value={form.values.salesReturned}
+                      onChange={form.handleChange}
                     />
                   </InputGroup>
                 </Card>
@@ -232,6 +287,8 @@ const Home = () => {
                         id="totalDiscountTarget"
                         name="totalDiscountTarget"
                         min={1}
+                        value={form.values.totalDiscountTarget}
+                        onChange={form.handleChange}
                       />
                     </InputGroup>
                     <InputGroup>
@@ -243,6 +300,8 @@ const Home = () => {
                         id="totalDiscountCompleted"
                         name="totalDiscountCompleted"
                         min={1}
+                        value={form.values.totalDiscountCompleted}
+                        onChange={form.handleChange}
                       />
                     </InputGroup>
                   </Row>
@@ -256,6 +315,8 @@ const Home = () => {
                         id="budgetDiscountTarget"
                         name="budgetDiscountTarget"
                         min={1}
+                        value={form.values.budgetDiscountTarget}
+                        onChange={form.handleChange}
                       />
                     </InputGroup>
                     <InputGroup>
@@ -267,6 +328,8 @@ const Home = () => {
                         id="budgetDiscountCompleted"
                         name="budgetDiscountCompleted"
                         min={1}
+                        value={form.values.budgetDiscountCompleted}
+                        onChange={form.handleChange}
                       />
                     </InputGroup>
                   </Row>
@@ -283,6 +346,8 @@ const Home = () => {
                         id="customersTarget"
                         name="customersTarget"
                         min={1}
+                        value={form.values.customersTarget}
+                        onChange={form.handleChange}
                       />
                     </InputGroup>
                     <InputGroup>
@@ -294,6 +359,8 @@ const Home = () => {
                         id="customersServed"
                         name="customersServed"
                         min={1}
+                        value={form.values.customersServed}
+                        onChange={form.handleChange}
                       />
                     </InputGroup>
                   </Row>
@@ -305,6 +372,8 @@ const Home = () => {
                         id="itemTarget"
                         name="itemTarget"
                         min={1}
+                        value={form.values.itemTarget}
+                        onChange={form.handleChange}
                       />
                     </InputGroup>
                     <InputGroup>
@@ -314,6 +383,8 @@ const Home = () => {
                         id="itemsSold"
                         name="itemsSold"
                         min={1}
+                        value={form.values.itemsSold}
+                        onChange={form.handleChange}
                       />
                     </InputGroup>
                   </Row>
@@ -324,7 +395,7 @@ const Home = () => {
         </form>
       </div>
       <Footer>
-        <Button disabled>
+        <Button disabled={!form.dirty} onClick={handleReset}>
           <RiResetLeftLine />
           Limpar Formulário
         </Button>
