@@ -1,0 +1,21 @@
+export interface ClassificationRequest {
+  fullName: string,
+  role: string,
+  sex: string,
+  city: string,
+  year: number | string,
+  month: number | string,
+  daysWorked: number | string,
+  salesTarget: number | string,
+  salesCompleted: number | string,
+  grossMargin: number | string,
+  salesReturned: number | string,
+  totalDiscountTarget: number | string,
+  totalDiscountCompleted: number | string,
+  budgetDiscountTarget: number | string,
+  budgetDiscountCompleted: number | string,
+  customersTarget: number | string,
+  customersServed: number | string,
+  itemTarget: number | string,
+  itemsSold: number | string
+}

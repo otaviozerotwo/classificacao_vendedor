@@ -12,6 +12,8 @@ import {
 import { RiResetLeftLine } from 'react-icons/ri'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import { useFormik } from 'formik'
+import type { ClassificationRequest } from '../../interfaces/ClassificationRequest'
+import { classificationApi } from '../../services/api'
 
 type Step = 'basicInfos' | 'performanceMetrics' | 'resultClassification'
 
@@ -19,7 +21,7 @@ const Home = () => {
   const [step, setStep] = useState<Step>('basicInfos')
   const isBackButtonDisabled = step === 'basicInfos'
 
-  const form = useFormik({
+  const form = useFormik<ClassificationRequest>({
     initialValues: {
       fullName: '',
       role: '',
@@ -41,7 +43,15 @@ const Home = () => {
       itemTarget: '',
       itemsSold: ''
     },
-    onSubmit: () => {}
+    onSubmit: async (values) => {
+      try {
+        const result = await classificationApi(values)
+
+        console.log(result)
+      } catch (error) {
+        console.error(error)
+      }
+    }
   })
 
   const handleContinue = () => {
@@ -81,6 +91,7 @@ const Home = () => {
                       placeholder="Ex: José da Silva"
                       value={form.values.fullName}
                       onChange={form.handleChange}
+                      required
                     />
                   </InputGroup>
                   <InputGroup>
@@ -92,25 +103,25 @@ const Home = () => {
                       onChange={form.handleChange}
                     >
                       <option value="">Selecione um cargo</option>
-                      <option value="atendenteFarmacia">
+                      <option value="3">
                         Atendente de Farmácia
                       </option>
-                      <option value="atendenteTelevendas">
+                      <option value="2">
                         Atendente de Televendas
                       </option>
-                      <option value="atendenteManipulacao">
+                      <option value="4">
                         Atendente de Manipulação
                       </option>
-                      <option value="auxiliarFarmacia">
+                      <option value="5">
                         Auxiliar de Farmácia
                       </option>
-                      <option value="operadorVendas">Operador de Vendas</option>
-                      <option value="operadorCaixa">Operador de Caixa</option>
-                      <option value="coordenadorEquipe">
+                      <option value="10">Operador de Vendas</option>
+                      <option value="9">Operador de Caixa</option>
+                      <option value="6">
                         Coordenador de Equipe
                       </option>
-                      <option value="farmaceutico">Farmacêutico</option>
-                      <option value="gerente">Gerente</option>
+                      <option value="7">Farmacêutico</option>
+                      <option value="8">Gerente</option>
                     </select>
                   </InputGroup>
                   <InputGroup>
@@ -122,8 +133,8 @@ const Home = () => {
                       onChange={form.handleChange}
                     >
                       <option value="">Selecione o sexo</option>
-                      <option value="male">Masculino</option>
-                      <option value="female">Feminino</option>
+                      <option value="1">Masculino</option>
+                      <option value="0">Feminino</option>
                     </select>
                   </InputGroup>
                 </Card>
@@ -140,27 +151,27 @@ const Home = () => {
                       onChange={form.handleChange}
                     >
                       <option value="">Selecione uma cidade</option>
-                      <option value="araxa">Araxá</option>
-                      <option value="carmoParanaiba">Carmo do Paranaíba</option>
-                      <option value="conceicaoAlagoas">
+                      <option value="1">Araxá</option>
+                      <option value="3">Carmo do Paranaíba</option>
+                      <option value="4">
                         Conceição das Alagoas
                       </option>
-                      <option value="coromandel">Coromandel</option>
-                      <option value="ibia">Ibiá</option>
-                      <option value="joaoPinheiro">João Pinheiro</option>
-                      <option value="lagoaFormosa">Lagoa Formosa</option>
-                      <option value="monteCarmelo">Monte Carmelo</option>
-                      <option value="paracatu">Paracatu</option>
-                      <option value="patosDeMinas">Patos de Minas</option>
-                      <option value="patrocinio">Patrocínio</option>
-                      <option value="presidenteOlegario">
+                      <option value="5">Coromandel</option>
+                      <option value="6">Ibiá</option>
+                      <option value="7">João Pinheiro</option>
+                      <option value="8">Lagoa Formosa</option>
+                      <option value="9">Monte Carmelo</option>
+                      <option value="10">Paracatu</option>
+                      <option value="11">Patos de Minas</option>
+                      <option value="12">Patrocínio</option>
+                      <option value="13">
                         Presidente Olegário
                       </option>
-                      <option value="saoGotardo">São Gotardo</option>
-                      <option value="serraDoSalitre">Serra do Salitre</option>
-                      <option value="uberaba">Uberaba</option>
-                      <option value="unai">Unaí</option>
-                      <option value="vazante">Vazante</option>
+                      <option value="14">São Gotardo</option>
+                      <option value="15">Serra do Salitre</option>
+                      <option value="16">Uberaba</option>
+                      <option value="17">Unaí</option>
+                      <option value="18">Vazante</option>
                     </select>
                   </InputGroup>
                 </Card>
@@ -175,9 +186,8 @@ const Home = () => {
                         type="number"
                         id="year"
                         name="year"
-                        min={2014}
-                        placeholder="2026"
-                        style={{ width: '84px' }}
+                        placeholder="Ex: 2026"
+                        style={{ width: '88px' }}
                         value={form.values.year}
                         onChange={form.handleChange}
                       />
@@ -190,8 +200,8 @@ const Home = () => {
                         name="month"
                         min={1}
                         max={12}
-                        placeholder="01"
-                        style={{ width: '84px' }}
+                        placeholder="Ex: 01"
+                        style={{ width: '88px' }}
                         value={form.values.month}
                         onChange={form.handleChange}
                       />
@@ -204,9 +214,8 @@ const Home = () => {
                       id="daysWorked"
                       name="daysWorked"
                       max={31}
-                      min={1}
                       placeholder="Ex: 15"
-                      style={{ width: '192px' }}
+                      style={{ width: '200px' }}
                       value={form.values.daysWorked}
                       onChange={form.handleChange}
                     />
@@ -233,9 +242,9 @@ const Home = () => {
                         type="number"
                         id="salesTarget"
                         name="salesTarget"
-                        min={1}
                         value={form.values.salesTarget}
                         onChange={form.handleChange}
+                        placeholder='0.00'
                       />
                     </InputGroup>
                     <InputGroup>
@@ -244,9 +253,9 @@ const Home = () => {
                         type="number"
                         id="salesCompleted"
                         name="salesCompleted"
-                        min={1}
                         value={form.values.salesCompleted}
                         onChange={form.handleChange}
+                        placeholder='0.00'
                       />
                     </InputGroup>
                   </Row>
@@ -256,9 +265,9 @@ const Home = () => {
                       type="number"
                       id="grossMargin"
                       name="grossMargin"
-                      min={1}
                       value={form.values.grossMargin}
                       onChange={form.handleChange}
+                      placeholder='0.00'
                     />
                   </InputGroup>
                   <InputGroup>
@@ -267,9 +276,9 @@ const Home = () => {
                       type="number"
                       id="salesReturned"
                       name="salesReturned"
-                      min={1}
                       value={form.values.salesReturned}
                       onChange={form.handleChange}
+                      placeholder='0.00'
                     />
                   </InputGroup>
                 </Card>
@@ -286,9 +295,9 @@ const Home = () => {
                         type="number"
                         id="totalDiscountTarget"
                         name="totalDiscountTarget"
-                        min={1}
                         value={form.values.totalDiscountTarget}
                         onChange={form.handleChange}
+                        placeholder='0.00'
                       />
                     </InputGroup>
                     <InputGroup>
@@ -299,9 +308,9 @@ const Home = () => {
                         type="number"
                         id="totalDiscountCompleted"
                         name="totalDiscountCompleted"
-                        min={1}
                         value={form.values.totalDiscountCompleted}
                         onChange={form.handleChange}
+                        placeholder='0.00'
                       />
                     </InputGroup>
                   </Row>
@@ -314,9 +323,9 @@ const Home = () => {
                         type="number"
                         id="budgetDiscountTarget"
                         name="budgetDiscountTarget"
-                        min={1}
                         value={form.values.budgetDiscountTarget}
                         onChange={form.handleChange}
+                        placeholder='0.00'
                       />
                     </InputGroup>
                     <InputGroup>
@@ -327,9 +336,9 @@ const Home = () => {
                         type="number"
                         id="budgetDiscountCompleted"
                         name="budgetDiscountCompleted"
-                        min={1}
                         value={form.values.budgetDiscountCompleted}
                         onChange={form.handleChange}
+                        placeholder='0.00'
                       />
                     </InputGroup>
                   </Row>
@@ -345,9 +354,9 @@ const Home = () => {
                         type="number"
                         id="customersTarget"
                         name="customersTarget"
-                        min={1}
                         value={form.values.customersTarget}
                         onChange={form.handleChange}
+                        placeholder='0'
                       />
                     </InputGroup>
                     <InputGroup>
@@ -358,9 +367,9 @@ const Home = () => {
                         type="number"
                         id="customersServed"
                         name="customersServed"
-                        min={1}
                         value={form.values.customersServed}
                         onChange={form.handleChange}
+                        placeholder='0'
                       />
                     </InputGroup>
                   </Row>
@@ -371,9 +380,9 @@ const Home = () => {
                         type="number"
                         id="itemTarget"
                         name="itemTarget"
-                        min={1}
                         value={form.values.itemTarget}
                         onChange={form.handleChange}
+                        placeholder='0'
                       />
                     </InputGroup>
                     <InputGroup>
@@ -382,9 +391,9 @@ const Home = () => {
                         type="number"
                         id="itemsSold"
                         name="itemsSold"
-                        min={1}
                         value={form.values.itemsSold}
                         onChange={form.handleChange}
+                        placeholder='0'
                       />
                     </InputGroup>
                   </Row>
@@ -392,24 +401,24 @@ const Home = () => {
               </GridContainer>
             </>
           ) : null}
+          <Footer>
+            <Button type='button' disabled={!form.dirty} onClick={handleReset}>
+              <RiResetLeftLine />
+              Limpar Formulário
+            </Button>
+            <div>
+              <Button type='button' disabled={isBackButtonDisabled} onClick={handleBack}>
+                <FaArrowLeft />
+                Voltar
+              </Button>
+              <Button type='submit' onClick={handleContinue}>
+                Avançar
+                <FaArrowRight />
+              </Button>
+            </div>
+          </Footer>
         </form>
       </div>
-      <Footer>
-        <Button disabled={!form.dirty} onClick={handleReset}>
-          <RiResetLeftLine />
-          Limpar Formulário
-        </Button>
-        <div>
-          <Button disabled={isBackButtonDisabled} onClick={handleBack}>
-            <FaArrowLeft />
-            Voltar
-          </Button>
-          <Button onClick={handleContinue}>
-            Avançar
-            <FaArrowRight />
-          </Button>
-        </div>
-      </Footer>
     </Container>
   )
 }
