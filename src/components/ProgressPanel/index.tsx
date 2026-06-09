@@ -7,7 +7,7 @@ const ProgressPanel = () => (
     <div>
       <S.CardStep>
         <S.Icon>
-          <FaUser color="#FFF" size={20} />
+          <FaUser color="#FFF" size={16} />
         </S.Icon>
         <div>
           <S.Step>Passo 1 de 3</S.Step>
@@ -19,7 +19,7 @@ const ProgressPanel = () => (
 
       <S.CardStep>
         <S.Icon>
-          <GrDocumentPerformance color="#FFF" size={20} />
+          <GrDocumentPerformance color="#FFF" size={16} />
         </S.Icon>
         <div>
           <S.Step>Passo 2 de 3</S.Step>
@@ -31,7 +31,7 @@ const ProgressPanel = () => (
 
       <S.CardStep>
         <S.Icon>
-          <FaTrophy color="#FFF" size={20} />
+          <FaTrophy color="#FFF" size={16} />
         </S.Icon>
         <div>
           <S.Step>Passo 3 de 3</S.Step>

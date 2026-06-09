@@ -1,4 +1,5 @@
 import styled, { createGlobalStyle } from 'styled-components'
+import colors from './colors'
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -9,7 +10,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background-color: #2c68a3ff;
+    background-color: ${colors.platinum};
+    color: ${colors.inkBlack};
   }
 `
 

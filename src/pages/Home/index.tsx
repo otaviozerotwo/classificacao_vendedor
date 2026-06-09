@@ -12,23 +12,32 @@ import {
 import { RiResetLeftLine } from 'react-icons/ri'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 
-type Step = 'basicInfos' | 'performanceMetrics'
+type Step = 'basicInfos' | 'performanceMetrics' | 'resultClassification'
 
 const Home = () => {
   const [step, setStep] = useState<Step>('basicInfos')
+  const isBackButtonDisabled = step === 'basicInfos'
+
+  const handleContinue = () => {
+    setStep('performanceMetrics')
+  }
+
+  const handleBack = () => {
+    setStep('basicInfos')
+  }
 
   return (
     <Container>
-      <h2>Informações Básicas do Vendedor</h2>
-      <p>
-        Preencha os dados de identificação e contexto do vendedor para iniciar a
-        avaliação.
-      </p>
       <div>
         <form>
-          <GridContainer>
-            {step === 'basicInfos' && (
-              <>
+          {step === 'basicInfos' ? (
+            <>
+              <h2>Informações Básicas do Vendedor</h2>
+              <p>
+                Preencha os dados de identificação e contexto do vendedor para
+                iniciar a avaliação.
+              </p>
+              <GridContainer>
                 <Card>
                   <CardTitle>
                     <h3>Identificação</h3>
@@ -127,6 +136,7 @@ const Home = () => {
                         name="year"
                         min={2014}
                         placeholder="2026"
+                        style={{ width: '84px' }}
                       />
                     </InputGroup>
                     <InputGroup>
@@ -138,6 +148,7 @@ const Home = () => {
                         min={1}
                         max={12}
                         placeholder="01"
+                        style={{ width: '84px' }}
                       />
                     </InputGroup>
                   </Row>
@@ -154,32 +165,40 @@ const Home = () => {
                     />
                   </InputGroup>
                 </Card>
-              </>
-            )}
-            {step === 'performanceMetrics' && (
-              <>
+              </GridContainer>
+            </>
+          ) : step === 'performanceMetrics' ? (
+            <>
+              <h2>Métricas de Desempenho</h2>
+              <p>
+                Preencha os dados de metas definidas e os resultados reais por
+                categoria de indicador.
+              </p>
+              <GridContainer>
                 <Card>
                   <CardTitle>
                     <h3>Desempenho de Vendas</h3>
                   </CardTitle>
-                  <InputGroup>
-                    <label htmlFor="salesTarget">META DE VENDA</label>
-                    <input
-                      type="number"
-                      id="salesTarget"
-                      name="salesTarget"
-                      min={1}
-                    />
-                  </InputGroup>
-                  <InputGroup>
-                    <label htmlFor="salesCompleted">VENDA REALIZADA</label>
-                    <input
-                      type="number"
-                      id="salesCompleted"
-                      name="salesCompleted"
-                      min={1}
-                    />
-                  </InputGroup>
+                  <Row>
+                    <InputGroup>
+                      <label htmlFor="salesTarget">META DE VENDA</label>
+                      <input
+                        type="number"
+                        id="salesTarget"
+                        name="salesTarget"
+                        min={1}
+                      />
+                    </InputGroup>
+                    <InputGroup>
+                      <label htmlFor="salesCompleted">VENDA REALIZADA</label>
+                      <input
+                        type="number"
+                        id="salesCompleted"
+                        name="salesCompleted"
+                        min={1}
+                      />
+                    </InputGroup>
+                  </Row>
                   <InputGroup>
                     <label htmlFor="grossMargin">MARGEM BRUTA</label>
                     <input
@@ -203,95 +222,105 @@ const Home = () => {
                   <CardTitle>
                     <h3>Descontos</h3>
                   </CardTitle>
-                  <InputGroup>
-                    <label htmlFor="totalDiscountTarget">
-                      META DE DESCONTO TOTAL
-                    </label>
-                    <input
-                      type="number"
-                      id="totalDiscountTarget"
-                      name="totalDiscountTarget"
-                      min={1}
-                    />
-                  </InputGroup>
-                  <InputGroup>
-                    <label htmlFor="totalDiscountCompleted">
-                      DESCONTO TOTAL REALIZADO
-                    </label>
-                    <input
-                      type="number"
-                      id="totalDiscountCompleted"
-                      name="totalDiscountCompleted"
-                      min={1}
-                    />
-                  </InputGroup>
-                  <InputGroup>
-                    <label htmlFor="budgetDiscountTarget">
-                      META DESCONTO DE VERBA
-                    </label>
-                    <input
-                      type="number"
-                      id="budgetDiscountTarget"
-                      name="budgetDiscountTarget"
-                      min={1}
-                    />
-                  </InputGroup>
-                  <InputGroup>
-                    <label htmlFor="budgetDiscountCompleted">
-                      DESCONTO DE VERBA REALIZADO
-                    </label>
-                    <input
-                      type="number"
-                      id="budgetDiscountCompleted"
-                      name="budgetDiscountCompleted"
-                      min={1}
-                    />
-                  </InputGroup>
+                  <Row>
+                    <InputGroup>
+                      <label htmlFor="totalDiscountTarget">
+                        META DE DESCONTO TOTAL
+                      </label>
+                      <input
+                        type="number"
+                        id="totalDiscountTarget"
+                        name="totalDiscountTarget"
+                        min={1}
+                      />
+                    </InputGroup>
+                    <InputGroup>
+                      <label htmlFor="totalDiscountCompleted">
+                        DESCONTO TOTAL REALIZADO
+                      </label>
+                      <input
+                        type="number"
+                        id="totalDiscountCompleted"
+                        name="totalDiscountCompleted"
+                        min={1}
+                      />
+                    </InputGroup>
+                  </Row>
+                  <Row>
+                    <InputGroup>
+                      <label htmlFor="budgetDiscountTarget">
+                        META DESCONTO DE VERBA
+                      </label>
+                      <input
+                        type="number"
+                        id="budgetDiscountTarget"
+                        name="budgetDiscountTarget"
+                        min={1}
+                      />
+                    </InputGroup>
+                    <InputGroup>
+                      <label htmlFor="budgetDiscountCompleted">
+                        DESCONTO DE VERBA REALIZADO
+                      </label>
+                      <input
+                        type="number"
+                        id="budgetDiscountCompleted"
+                        name="budgetDiscountCompleted"
+                        min={1}
+                      />
+                    </InputGroup>
+                  </Row>
                 </Card>
                 <Card>
                   <CardTitle>
                     <h3>Produtividade</h3>
                   </CardTitle>
-                  <InputGroup>
-                    <label htmlFor="customersTarget">META DE CLIENTES</label>
-                    <input
-                      type="number"
-                      id="customersTarget"
-                      name="customersTarget"
-                      min={1}
-                    />
-                  </InputGroup>
-                  <InputGroup>
-                    <label htmlFor="customersServed">CLIENTES ATENDIDOS</label>
-                    <input
-                      type="number"
-                      id="customersServed"
-                      name="customersServed"
-                      min={1}
-                    />
-                  </InputGroup>
-                  <InputGroup>
-                    <label htmlFor="itemTarget">META DE ITENS</label>
-                    <input
-                      type="number"
-                      id="itemTarget"
-                      name="itemTarget"
-                      min={1}
-                    />
-                  </InputGroup>
-                  <InputGroup>
-                    <label htmlFor="itemsSold">ITENS VENDIDOS</label>
-                    <input
-                      type="number"
-                      id="itemsSold"
-                      name="itemsSold"
-                      min={1}
-                    />
-                  </InputGroup>
+                  <Row>
+                    <InputGroup>
+                      <label htmlFor="customersTarget">META DE CLIENTES</label>
+                      <input
+                        type="number"
+                        id="customersTarget"
+                        name="customersTarget"
+                        min={1}
+                      />
+                    </InputGroup>
+                    <InputGroup>
+                      <label htmlFor="customersServed">
+                        CLIENTES ATENDIDOS
+                      </label>
+                      <input
+                        type="number"
+                        id="customersServed"
+                        name="customersServed"
+                        min={1}
+                      />
+                    </InputGroup>
+                  </Row>
+                  <Row>
+                    <InputGroup>
+                      <label htmlFor="itemTarget">META DE ITENS</label>
+                      <input
+                        type="number"
+                        id="itemTarget"
+                        name="itemTarget"
+                        min={1}
+                      />
+                    </InputGroup>
+                    <InputGroup>
+                      <label htmlFor="itemsSold">ITENS VENDIDOS</label>
+                      <input
+                        type="number"
+                        id="itemsSold"
+                        name="itemsSold"
+                        min={1}
+                      />
+                    </InputGroup>
+                  </Row>
                 </Card>
-              </>
-            )}
-          </GridContainer>
+              </GridContainer>
+            </>
+          ) : null}
         </form>
       </div>
       <Footer>
@@ -300,11 +329,11 @@ const Home = () => {
           Limpar Formulário
         </Button>
         <div>
-          <Button disabled>
+          <Button disabled={isBackButtonDisabled} onClick={handleBack}>
             <FaArrowLeft />
             Voltar
           </Button>
-          <Button>
+          <Button onClick={handleContinue}>
             Avançar
             <FaArrowRight />
           </Button>
