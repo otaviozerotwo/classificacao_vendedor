@@ -1,8 +1,8 @@
 export interface ClassificationRequest {
   fullName: string,
-  role: string,
-  sex: string,
-  city: string,
+  role: number,
+  sex: number,
+  city: number,
   year: number,
   month: number,
   daysWorked: number,
