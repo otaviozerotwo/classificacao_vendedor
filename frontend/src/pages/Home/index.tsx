@@ -12,6 +12,7 @@ import {
 import { RiResetLeftLine } from 'react-icons/ri'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import { useFormik } from 'formik'
+import * as Yup from 'yup'
 import type { ClassificationRequest } from '../../interfaces/ClassificationRequest'
 import { classificationApi } from '../../services/api'
 
@@ -43,6 +44,88 @@ const Home = () => {
       itemTarget: '',
       itemsSold: ''
     },
+    validationSchema: Yup.object({
+      fullName: Yup.string().min(3, 'O nome precisa ter pelo menos 3 caracteres').required('O campo é obrigatório'),
+      role: Yup.string().required('O campo é obrigatório'),
+      sex: Yup.string().required('O campo é obrigatório'),
+      city: Yup.string().required('O campo é obrigatório'),
+      year: Yup.string().required('O campo é obrigatório'),
+      month: Yup.string().required('O campo é obrigatório'),
+      daysWorked: Yup.string().required('O campo é obrigatório'),
+
+      salesTarget: Yup.string().when((_values, schema) =>
+        step === 'performanceMetrics'
+          ? schema
+              .required('O campo é obrigatório')
+          : schema
+      ),
+      salesCompleted: Yup.string().when((_values, schema) =>
+        step === 'performanceMetrics'
+          ? schema
+              .required('O campo é obrigatório')
+          : schema
+      ),
+      grossMargin: Yup.string().when((_values, schema) =>
+        step === 'performanceMetrics'
+          ? schema
+              .required('O campo é obrigatório')
+          : schema
+      ),
+      salesReturned: Yup.string().when((_values, schema) =>
+        step === 'performanceMetrics'
+          ? schema
+              .required('O campo é obrigatório')
+          : schema
+      ),
+      totalDiscountTarget: Yup.string().when((_values, schema) =>
+        step === 'performanceMetrics'
+          ? schema
+              .required('O campo é obrigatório')
+          : schema
+      ),
+      totalDiscountCompleted: Yup.string().when((_values, schema) =>
+        step === 'performanceMetrics'
+          ? schema
+              .required('O campo é obrigatório')
+          : schema
+      ),
+      budgetDiscountTarget: Yup.string().when((_values, schema) =>
+        step === 'performanceMetrics'
+          ? schema
+              .required('O campo é obrigatório')
+          : schema
+      ),
+      budgetDiscountCompleted: Yup.string().when((_values, schema) =>
+        step === 'performanceMetrics'
+          ? schema
+              .required('O campo é obrigatório')
+          : schema
+      ),
+      customersTarget: Yup.string().when((_values, schema) =>
+        step === 'performanceMetrics'
+          ? schema
+              .required('O campo é obrigatório')
+          : schema
+      ),
+      customersServed: Yup.string().when((_values, schema) =>
+        step === 'performanceMetrics'
+          ? schema
+              .required('O campo é obrigatório')
+          : schema
+      ),
+      itemTarget: Yup.string().when((_values, schema) =>
+        step === 'performanceMetrics'
+          ? schema
+              .required('O campo é obrigatório')
+          : schema
+      ),
+      itemsSold: Yup.string().when((_values, schema) =>
+        step === 'performanceMetrics'
+          ? schema
+              .required('O campo é obrigatório')
+          : schema
+      )
+    }),
     onSubmit: async (values) => {
       try {
         const result = await classificationApi(values)
@@ -54,8 +137,33 @@ const Home = () => {
     }
   })
 
+  const checkInput = (fieldName: string, mode: 'valid' | 'error' = 'valid') => {
+    const isTouched = fieldName in form.touched
+    const isInvalid = fieldName in form.errors
+
+    if (mode === 'valid') {
+      return isTouched && !isInvalid
+    }
+
+    if (mode === 'error') {
+      return isTouched && isInvalid
+    }
+  }
+
   const handleContinue = () => {
-    setStep('performanceMetrics')
+    if (
+      checkInput('fullName') &&
+      checkInput('role') &&
+      checkInput('sex') &&
+      checkInput('city') &&
+      checkInput('year') &&
+      checkInput('month') &&
+      checkInput('daysWorked')
+    ) {
+      setStep('performanceMetrics')
+    } else {
+      alert('Preencha todos os campos obrigatórios')
+    }
   }
 
   const handleBack = () => {
@@ -64,6 +172,27 @@ const Home = () => {
 
   const handleReset = () => {
     form.resetForm()
+  }
+
+  const handleSendForm = () => {
+    if (
+      checkInput('salesTarget') &&
+      checkInput('salesCompleted') &&
+      checkInput('grossMargin') &&
+      checkInput('salesReturned') &&
+      checkInput('totalDiscountTarget') &&
+      checkInput('totalDiscountCompleted') &&
+      checkInput('budgetDiscountTarget') &&
+      checkInput('budgetDiscountCompleted') &&
+      checkInput('customersTarget') &&
+      checkInput('customersServed') &&
+      checkInput('itemTarget') &&
+      checkInput('itemsSold')
+    ) {
+      form.handleSubmit()
+    } else {
+      alert('Preencha todos os campos obrigatórios')
+    }
   }
 
   return (
@@ -91,7 +220,7 @@ const Home = () => {
                       placeholder="Ex: José da Silva"
                       value={form.values.fullName}
                       onChange={form.handleChange}
-                      required
+                      onBlur={form.handleBlur}
                     />
                   </InputGroup>
                   <InputGroup>
@@ -101,6 +230,7 @@ const Home = () => {
                       id="role"
                       value={form.values.role}
                       onChange={form.handleChange}
+                      onBlur={form.handleBlur}
                     >
                       <option value="">Selecione um cargo</option>
                       <option value="3">
@@ -131,6 +261,7 @@ const Home = () => {
                       id="sex"
                       value={form.values.sex}
                       onChange={form.handleChange}
+                      onBlur={form.handleBlur}
                     >
                       <option value="">Selecione o sexo</option>
                       <option value="1">Masculino</option>
@@ -149,6 +280,7 @@ const Home = () => {
                       id="city"
                       value={form.values.city}
                       onChange={form.handleChange}
+                      onBlur={form.handleBlur}
                     >
                       <option value="">Selecione uma cidade</option>
                       <option value="1">Araxá</option>
@@ -190,6 +322,7 @@ const Home = () => {
                         style={{ width: '88px' }}
                         value={form.values.year}
                         onChange={form.handleChange}
+                        onBlur={form.handleBlur}
                       />
                     </InputGroup>
                     <InputGroup>
@@ -204,6 +337,7 @@ const Home = () => {
                         style={{ width: '88px' }}
                         value={form.values.month}
                         onChange={form.handleChange}
+                        onBlur={form.handleBlur}
                       />
                     </InputGroup>
                   </Row>
@@ -218,6 +352,7 @@ const Home = () => {
                       style={{ width: '200px' }}
                       value={form.values.daysWorked}
                       onChange={form.handleChange}
+                      onBlur={form.handleBlur}
                     />
                   </InputGroup>
                 </Card>
@@ -244,6 +379,7 @@ const Home = () => {
                         name="salesTarget"
                         value={form.values.salesTarget}
                         onChange={form.handleChange}
+                        onBlur={form.handleBlur}
                         placeholder='0.00'
                       />
                     </InputGroup>
@@ -255,6 +391,7 @@ const Home = () => {
                         name="salesCompleted"
                         value={form.values.salesCompleted}
                         onChange={form.handleChange}
+                        onBlur={form.handleBlur}
                         placeholder='0.00'
                       />
                     </InputGroup>
@@ -267,6 +404,7 @@ const Home = () => {
                       name="grossMargin"
                       value={form.values.grossMargin}
                       onChange={form.handleChange}
+                      onBlur={form.handleBlur}
                       placeholder='0.00'
                     />
                   </InputGroup>
@@ -278,6 +416,7 @@ const Home = () => {
                       name="salesReturned"
                       value={form.values.salesReturned}
                       onChange={form.handleChange}
+                      onBlur={form.handleBlur}
                       placeholder='0.00'
                     />
                   </InputGroup>
@@ -297,6 +436,7 @@ const Home = () => {
                         name="totalDiscountTarget"
                         value={form.values.totalDiscountTarget}
                         onChange={form.handleChange}
+                        onBlur={form.handleBlur}
                         placeholder='0.00'
                       />
                     </InputGroup>
@@ -310,6 +450,7 @@ const Home = () => {
                         name="totalDiscountCompleted"
                         value={form.values.totalDiscountCompleted}
                         onChange={form.handleChange}
+                        onBlur={form.handleBlur}
                         placeholder='0.00'
                       />
                     </InputGroup>
@@ -325,6 +466,7 @@ const Home = () => {
                         name="budgetDiscountTarget"
                         value={form.values.budgetDiscountTarget}
                         onChange={form.handleChange}
+                        onBlur={form.handleBlur}
                         placeholder='0.00'
                       />
                     </InputGroup>
@@ -338,6 +480,7 @@ const Home = () => {
                         name="budgetDiscountCompleted"
                         value={form.values.budgetDiscountCompleted}
                         onChange={form.handleChange}
+                        onBlur={form.handleBlur}
                         placeholder='0.00'
                       />
                     </InputGroup>
@@ -356,6 +499,7 @@ const Home = () => {
                         name="customersTarget"
                         value={form.values.customersTarget}
                         onChange={form.handleChange}
+                        onBlur={form.handleBlur}
                         placeholder='0'
                       />
                     </InputGroup>
@@ -369,6 +513,7 @@ const Home = () => {
                         name="customersServed"
                         value={form.values.customersServed}
                         onChange={form.handleChange}
+                        onBlur={form.handleBlur}
                         placeholder='0'
                       />
                     </InputGroup>
@@ -382,6 +527,7 @@ const Home = () => {
                         name="itemTarget"
                         value={form.values.itemTarget}
                         onChange={form.handleChange}
+                        onBlur={form.handleBlur}
                         placeholder='0'
                       />
                     </InputGroup>
@@ -393,6 +539,7 @@ const Home = () => {
                         name="itemsSold"
                         value={form.values.itemsSold}
                         onChange={form.handleChange}
+                        onBlur={form.handleBlur}
                         placeholder='0'
                       />
                     </InputGroup>
@@ -411,10 +558,18 @@ const Home = () => {
                 <FaArrowLeft />
                 Voltar
               </Button>
-              <Button type='submit' onClick={handleContinue}>
-                Avançar
-                <FaArrowRight />
-              </Button>
+              {step === 'basicInfos' && (
+                <Button type='button' onClick={handleContinue}>
+                  Avançar
+                  <FaArrowRight />
+                </Button>
+              )}
+              {step === 'performanceMetrics' && (
+                <Button type='submit' onClick={handleSendForm}>
+                  Enviar
+                  <FaArrowRight />
+                </Button>
+              )}
             </div>
           </Footer>
         </form>
