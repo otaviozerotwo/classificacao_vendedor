@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 import colors from '../../styles/colors'
 
+type CardResultProps = {
+  backgroundColor?: string
+}
+
 export const Container = styled.div`
   margin: 24px 0px;
 
@@ -18,6 +22,10 @@ export const GridContainer = styled.div`
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
   margin-top: 24px;
+
+  &.gridResult {
+    grid-template-columns: 1fr 2fr;
+  }
 `
 
 export const Card = styled.div`
@@ -95,4 +103,55 @@ export const Button = styled.button`
   cursor: pointer;
   gap: 8px;
   margin-top: 14px;
+
+  &.nextButton {
+    background-color: ${colors.blue};
+    color: ${colors.white};
+    border-color: ${colors.blue};
+  }
+`
+
+export const CardResult = styled.div<CardResultProps>`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+  padding: 20px;
+  border: 1px solid trasparent;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  background-color: ${(props) => props.backgroundColor};
+  color: ${colors.white};
+
+  .resultIcon {
+    border-radius: 50%;
+    padding: 24px;
+    background-color: rgba(255,255,255,0.2);
+  }
+
+  .resultClassification {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: rgba(255,255,255,0.2);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 28px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+`
+
+export const CardResume = styled.div`
+  display: flex;
+  gap: 32px;
+
+  .gridResume {
+    display: grid;
+    grid-template-columns: 1fr;
+    flex: 1;
+    gap: 8px;
+    font-size: 14px;
+  }
 `

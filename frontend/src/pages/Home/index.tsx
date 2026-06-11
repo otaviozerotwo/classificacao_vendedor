@@ -2,6 +2,8 @@ import { useState } from 'react'
 import {
   Button,
   Card,
+  CardResult,
+  CardResume,
   CardTitle,
   Container,
   Footer,
@@ -11,15 +13,23 @@ import {
 } from './styles'
 import { RiResetLeftLine } from 'react-icons/ri'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
+import { FaCircleCheck, FaTrophy } from "react-icons/fa6"
+import { TbMoodEmptyFilled } from "react-icons/tb"
+import { PiEmptyBold } from "react-icons/pi"
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import type { ClassificationRequest } from '../../interfaces/ClassificationRequest'
 import { classificationApi } from '../../services/api'
+import { cityMap } from '../../constants/cityMap'
+import { roleMap } from '../../constants/roleMap'
+import { sexMap } from '../../constants/sexMap'
+import colors from '../../styles/colors'
 
 type Step = 'basicInfos' | 'performanceMetrics' | 'resultClassification'
 
 const Home = () => {
   const [step, setStep] = useState<Step>('basicInfos')
+  const [classificationResult, setClassificationResult] = useState<string>('')
   const isBackButtonDisabled = step === 'basicInfos'
 
   const form = useFormik<ClassificationRequest>({
@@ -130,6 +140,8 @@ const Home = () => {
       try {
         const result = await classificationApi(values)
 
+        setClassificationResult(result?.result ?? '')
+
         console.log(result)
       } catch (error) {
         console.error(error)
@@ -167,7 +179,11 @@ const Home = () => {
   }
 
   const handleBack = () => {
-    setStep('basicInfos')
+    if (step === 'resultClassification') {
+      setStep('performanceMetrics')
+    } else {
+      setStep('basicInfos')
+    }
   }
 
   const handleReset = () => {
@@ -190,9 +206,15 @@ const Home = () => {
       checkInput('itemsSold')
     ) {
       form.handleSubmit()
+      setStep('resultClassification')
     } else {
       alert('Preencha todos os campos obrigatórios')
     }
+  }
+
+  const handleFinish = () => {
+    handleReset()
+    setStep('basicInfos')
   }
 
   return (
@@ -547,27 +569,104 @@ const Home = () => {
                 </Card>
               </GridContainer>
             </>
-          ) : null}
+          ) : step === 'resultClassification' ? (
+            <>
+              <h2>Resultado da Classificação</h2>
+              <p>
+                Análise do desempenho com base nas métricas inseridas.
+              </p>
+              <GridContainer className='gridResult'>
+                {classificationResult === 'Meta Atingida' ? (
+                  <CardResult backgroundColor={colors.green}>
+                    <div className='resultIcon'>
+                      <FaTrophy size={48} color='#FFF' />
+                    </div>
+                    <div className='resultClassification'>
+                      <FaCircleCheck />
+                      <div>
+                        <span>{classificationResult || '-'}</span>
+                      </div>
+                    </div>
+                  </CardResult>
+                ) : (
+                  <CardResult backgroundColor={colors.red}>
+                    <div className='resultIcon'>
+                      <TbMoodEmptyFilled size={48} color='#FFF' />
+                    </div>
+                    <div className='resultClassification'>
+                      <PiEmptyBold />
+                      <div>
+                        <span>{classificationResult || '-'}</span>
+                      </div>
+                    </div>
+                  </CardResult>
+                )}
+                <Card>
+                  <CardTitle>Resumo dos Indicadores e Métricas</CardTitle>
+                  <CardResume>
+                    <div className='gridResume'>
+                      <span>Nome: {form.values.fullName}</span>
+                      <span>Cargo: {roleMap[form.values.role]}</span>
+                      <span>Sexo: {sexMap[form.values.sex]}</span>
+                      <span>Cidade: {cityMap[form.values.city]}</span>
+                      <span>Ano: {form.values.year}</span>
+                      <span>Mês: {form.values.month}</span>
+                    </div>
+                    <div className='gridResume'>
+                      <span>Dias Trabalhados: {form.values.daysWorked}</span>
+                      <span>Meta de Venda: {form.values.salesTarget}</span>
+                      <span>Venda Realizada: {form.values.salesCompleted}</span>
+                      <span>Margem Bruta: {form.values.grossMargin}</span>
+                      <span>Devolução Realizada: {form.values.salesReturned}</span>
+                      <span>Meta de Desconto Total: {form.values.totalDiscountTarget}</span>
+                    </div>
+                    <div className='gridResume'>
+                      <span>Desconto Total Realizado: {form.values.totalDiscountCompleted}</span>
+                      <span>Meta Desconto de Verba: {form.values.budgetDiscountTarget}</span>
+                      <span>Desconto de Verba Realizado: {form.values.budgetDiscountCompleted}</span>
+                      <span>Meta de Clientes: {form.values.customersTarget}</span>
+                      <span>Clientes Atendidos: {form.values.customersServed}</span>
+                      <span>Meta de Itens: {form.values.itemTarget}</span>
+                      <span>Itens Vendidos: {form.values.itemsSold}</span>
+                    </div>
+                  </CardResume>
+                </Card>
+              </GridContainer>
+            </>
+          ) : null }
           <Footer>
-            <Button type='button' disabled={!form.dirty} onClick={handleReset}>
-              <RiResetLeftLine />
-              Limpar Formulário
-            </Button>
+            {step !== 'resultClassification' ? (
+              <Button type='button' disabled={!form.dirty} onClick={handleReset}>
+                <RiResetLeftLine />
+                Limpar Formulário
+              </Button>
+            ) : (
+              <Button type='button' disabled>
+                <RiResetLeftLine />
+                Limpar Formulário
+              </Button>
+            )}
             <div>
               <Button type='button' disabled={isBackButtonDisabled} onClick={handleBack}>
                 <FaArrowLeft />
                 Voltar
               </Button>
               {step === 'basicInfos' && (
-                <Button type='button' onClick={handleContinue}>
+                <Button type='button' onClick={handleContinue} className='nextButton'>
                   Avançar
                   <FaArrowRight />
                 </Button>
               )}
               {step === 'performanceMetrics' && (
-                <Button type='submit' onClick={handleSendForm}>
+                <Button type='submit' onClick={handleSendForm} className='nextButton'>
                   Enviar
                   <FaArrowRight />
+                </Button>
+              )}
+              {step === 'resultClassification' && (
+                <Button type='button' onClick={handleFinish} className='nextButton'>
+                  <FaCircleCheck />
+                  Concluir
                 </Button>
               )}
             </div>

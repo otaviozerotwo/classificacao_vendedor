@@ -1,6 +1,8 @@
 export default {
   white: '#FFFFFF',
   blue: '#2563EB',
+  green: '#06996B',
+  red: '#F44160',
   platinum: '#F1F5F9',
   powderBlue: '#A9B5C6',
   charcoalBlue: '#414D62',
