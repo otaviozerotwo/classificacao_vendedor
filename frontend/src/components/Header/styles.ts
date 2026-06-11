@@ -7,7 +7,6 @@ export const Container = styled.div`
   height: 72px;
   background-color: ${colors.white};
   border-bottom: 1px solid ${colors.powderBlue};
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
 `
 
 export const Logo = styled.div`
@@ -20,8 +19,11 @@ export const Logo = styled.div`
   margin-right: 16px;
   background-color: ${colors.blue};
   border-radius: 14px;
+  box-shadow: 2px 2px 8px ${colors.inkBlack};
 `
 
 export const Title = styled.h1`
+  font-family: "Montserrat", sans-serif;
   font-size: 24px;
+  text-shadow: 1px 1px;
 `

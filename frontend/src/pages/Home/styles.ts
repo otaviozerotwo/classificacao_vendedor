@@ -10,6 +10,7 @@ export const Container = styled.div`
 
   h2 {
     margin-bottom: 8px;
+    text-shadow: 0.5px 0.5px;
   }
 
   p {
@@ -35,6 +36,7 @@ export const Card = styled.div`
   border-radius: 12px;
   margin-bottom: 24px;
   background-color: ${colors.white};
+  box-shadow: 1px 1px 2px ${colors.powderBlue};
 `
 
 export const CardTitle = styled.div`

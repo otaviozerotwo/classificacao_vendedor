@@ -603,7 +603,7 @@ const Home = () => {
                   </CardResult>
                 )}
                 <Card>
-                  <CardTitle>Resumo dos Indicadores e Métricas</CardTitle>
+                  <CardTitle><h3>Resumo dos Indicadores e Métricas</h3></CardTitle>
                   <CardResume>
                     <div className='gridResume'>
                       <span>Nome: {form.values.fullName}</span>
