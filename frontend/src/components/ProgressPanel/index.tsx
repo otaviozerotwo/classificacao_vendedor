@@ -1,6 +1,5 @@
 import * as S from './styles'
-import { FaUser, FaTrophy } from 'react-icons/fa6'
-import { GrDocumentPerformance } from 'react-icons/gr'
+import { FaUser, FaTrophy,FaListCheck } from 'react-icons/fa6'
 import { useStep } from '../../contexts/StepContext'
 
 type StepStatus = 'pending' | 'active' | 'completed'
@@ -44,7 +43,7 @@ const ProgressPanel = () => {
 
         <S.CardStep status={getStepStatus(2)}>
           <S.Icon status={getStepStatus(2)}>
-            <GrDocumentPerformance color="#FFF" size={16} />
+            <FaListCheck color="#FFF" size={16} />
           </S.Icon>
           <div>
             <S.Step>Passo 2 de 3</S.Step>

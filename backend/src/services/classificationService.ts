@@ -5,8 +5,8 @@ export function classify(data: ClassificationRequest): string {
 
   const city = data.city;
   const role = data.role;
-  const sex = data.sex;
-  const salesTarget = data.salesTarget;
+  // const sex = data.sex;
+  // const salesTarget = data.salesTarget;
   const salesCompleted = data.salesCompleted;
   const grossMargin = data.grossMargin;
   const salesReturned = data.salesReturned;
@@ -20,7 +20,7 @@ export function classify(data: ClassificationRequest): string {
   const itemsSold = data.itemsSold;
   const daysWorked = data.daysWorked;
   const month = data.month;
-  const year = data.year;
+  // const year = data.year;
 
   const discountTarget = 0;
 

@@ -111,6 +111,10 @@ export const Button = styled.button`
     color: ${colors.white};
     border-color: ${colors.blue};
   }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
 `
 
 export const CardResult = styled.div<CardResultProps>`
@@ -118,7 +122,7 @@ export const CardResult = styled.div<CardResultProps>`
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-
+  box-shadow: 1px 1px 2px ${colors.powderBlue};
   padding: 20px;
   border: 1px solid trasparent;
   border-radius: 12px;

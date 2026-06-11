@@ -25,6 +25,8 @@ import { roleMap } from '../../constants/roleMap'
 import { sexMap } from '../../constants/sexMap'
 import colors from '../../styles/colors'
 import { useStep } from '../../contexts/StepContext'
+import { IMaskInput } from 'react-imask'
+import { NumericFormat } from 'react-number-format'
 
 const Home = () => {
   const [classificationResult, setClassificationResult] = useState<string>('')
@@ -337,8 +339,8 @@ const Home = () => {
                   <Row>
                     <InputGroup>
                       <label htmlFor="year">ANO</label>
-                      <input
-                        type="number"
+                      <IMaskInput
+                        type="text"
                         id="year"
                         name="year"
                         placeholder="Ex: 2026"
@@ -346,12 +348,13 @@ const Home = () => {
                         value={form.values.year}
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
+                        mask="0000"
                       />
                     </InputGroup>
                     <InputGroup>
                       <label htmlFor="month">MÊS</label>
-                      <input
-                        type="number"
+                      <IMaskInput
+                        type="text"
                         id="month"
                         name="month"
                         min={1}
@@ -361,13 +364,14 @@ const Home = () => {
                         value={form.values.month}
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
+                        mask="00"
                       />
                     </InputGroup>
                   </Row>
                   <InputGroup>
                     <label htmlFor="daysWorked">DIAS TRABALHADOS</label>
-                    <input
-                      type="number"
+                    <IMaskInput
+                      type="text"
                       id="daysWorked"
                       name="daysWorked"
                       max={31}
@@ -376,6 +380,7 @@ const Home = () => {
                       value={form.values.daysWorked}
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
+                      mask="00"
                     />
                   </InputGroup>
                 </Card>
@@ -396,51 +401,63 @@ const Home = () => {
                   <Row>
                     <InputGroup>
                       <label htmlFor="salesTarget">META DE VENDA</label>
-                      <input
-                        type="number"
+                      <NumericFormat
+                        type="text"
                         id="salesTarget"
                         name="salesTarget"
                         value={form.values.salesTarget}
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
                         placeholder='0.00'
+                        decimalSeparator='.'
+                        decimalScale={2}
+                        allowNegative={false}
                       />
                     </InputGroup>
                     <InputGroup>
                       <label htmlFor="salesCompleted">VENDA REALIZADA</label>
-                      <input
-                        type="number"
+                      <NumericFormat
+                        type="text"
                         id="salesCompleted"
                         name="salesCompleted"
                         value={form.values.salesCompleted}
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
                         placeholder='0.00'
+                        decimalSeparator='.'
+                        decimalScale={2}
+                        allowNegative={false}
                       />
                     </InputGroup>
                   </Row>
                   <InputGroup>
                     <label htmlFor="grossMargin">MARGEM BRUTA</label>
-                    <input
-                      type="number"
+                    <NumericFormat
+                      type="text"
                       id="grossMargin"
                       name="grossMargin"
                       value={form.values.grossMargin}
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
                       placeholder='0.00'
+                      decimalSeparator='.'
+                      decimalScale={2}
+                      allowNegative={false}
                     />
                   </InputGroup>
                   <InputGroup>
                     <label htmlFor="salesReturned">DEVOLUÇÃO REALIZADA</label>
-                    <input
-                      type="number"
+                    <NumericFormat
+                      type="text"
                       id="salesReturned"
                       name="salesReturned"
                       value={form.values.salesReturned}
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
                       placeholder='0.00'
+                      decimalSeparator='.'
+                      decimalScale={2}
+                      allowNegative={false}
                     />
                   </InputGroup>
                 </Card>
@@ -453,28 +470,34 @@ const Home = () => {
                       <label htmlFor="totalDiscountTarget">
                         META DE DESCONTO TOTAL
                       </label>
-                      <input
-                        type="number"
+                      <NumericFormat
+                        type="text"
                         id="totalDiscountTarget"
                         name="totalDiscountTarget"
                         value={form.values.totalDiscountTarget}
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
                         placeholder='0.00'
+                        decimalSeparator='.'
+                        decimalScale={2}
+                        allowNegative={false}
                       />
                     </InputGroup>
                     <InputGroup>
                       <label htmlFor="totalDiscountCompleted">
                         DESCONTO TOTAL REALIZADO
                       </label>
-                      <input
-                        type="number"
+                      <NumericFormat
+                        type="text"
                         id="totalDiscountCompleted"
                         name="totalDiscountCompleted"
                         value={form.values.totalDiscountCompleted}
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
                         placeholder='0.00'
+                        decimalSeparator='.'
+                        decimalScale={2}
+                        allowNegative={false}
                       />
                     </InputGroup>
                   </Row>
@@ -483,28 +506,34 @@ const Home = () => {
                       <label htmlFor="budgetDiscountTarget">
                         META DESCONTO DE VERBA
                       </label>
-                      <input
-                        type="number"
+                      <NumericFormat
+                        type="text"
                         id="budgetDiscountTarget"
                         name="budgetDiscountTarget"
                         value={form.values.budgetDiscountTarget}
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
                         placeholder='0.00'
+                        decimalSeparator='.'
+                        decimalScale={2}
+                        allowNegative={false}
                       />
                     </InputGroup>
                     <InputGroup>
                       <label htmlFor="budgetDiscountCompleted">
                         DESCONTO DE VERBA REALIZADO
                       </label>
-                      <input
-                        type="number"
+                      <NumericFormat
+                        type="text"
                         id="budgetDiscountCompleted"
                         name="budgetDiscountCompleted"
                         value={form.values.budgetDiscountCompleted}
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
                         placeholder='0.00'
+                        decimalSeparator='.'
+                        decimalScale={2}
+                        allowNegative={false}
                       />
                     </InputGroup>
                   </Row>
@@ -516,54 +545,58 @@ const Home = () => {
                   <Row>
                     <InputGroup>
                       <label htmlFor="customersTarget">META DE CLIENTES</label>
-                      <input
-                        type="number"
+                      <IMaskInput
+                        type="text"
                         id="customersTarget"
                         name="customersTarget"
                         value={form.values.customersTarget}
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
                         placeholder='0'
+                        mask="000000"
                       />
                     </InputGroup>
                     <InputGroup>
                       <label htmlFor="customersServed">
                         CLIENTES ATENDIDOS
                       </label>
-                      <input
-                        type="number"
+                      <IMaskInput
+                        type="text"
                         id="customersServed"
                         name="customersServed"
                         value={form.values.customersServed}
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
                         placeholder='0'
+                        mask="000000"
                       />
                     </InputGroup>
                   </Row>
                   <Row>
                     <InputGroup>
                       <label htmlFor="itemTarget">META DE ITENS</label>
-                      <input
-                        type="number"
+                      <IMaskInput
+                        type="text"
                         id="itemTarget"
                         name="itemTarget"
                         value={form.values.itemTarget}
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
                         placeholder='0'
+                        mask="000000"
                       />
                     </InputGroup>
                     <InputGroup>
                       <label htmlFor="itemsSold">ITENS VENDIDOS</label>
-                      <input
-                        type="number"
+                      <IMaskInput
+                        type="text"
                         id="itemsSold"
                         name="itemsSold"
                         value={form.values.itemsSold}
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
                         placeholder='0'
+                        mask="000000"
                       />
                     </InputGroup>
                   </Row>
