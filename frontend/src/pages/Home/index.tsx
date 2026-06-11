@@ -1,18 +1,14 @@
 import { useState } from 'react'
 import {
-  Button,
   Card,
   CardResult,
   CardResume,
   CardTitle,
   Container,
-  Footer,
   GridContainer,
   InputGroup,
   Row
 } from './styles'
-import { RiResetLeftLine } from 'react-icons/ri'
-import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import { FaCircleCheck, FaTrophy } from "react-icons/fa6"
 import { TbMoodEmptyFilled } from "react-icons/tb"
 import { PiEmptyBold } from "react-icons/pi"
@@ -28,6 +24,7 @@ import { IMaskInput } from 'react-imask'
 import { NumericFormat } from 'react-number-format'
 import ErrorMessage from '../../components/ErrorMessage'
 import { classificationSchema } from '../../utils/validationSchema'
+import Footer from './components/Footer'
 
 const Home = () => {
   const [classificationResult, setClassificationResult] = useState<string>('')
@@ -594,43 +591,16 @@ const Home = () => {
               )}
             </>
           ) : null }
-          <Footer>
-            {step !== 'resultClassification' ? (
-              <Button type='button' disabled={!form.dirty} onClick={handleReset}>
-                <RiResetLeftLine />
-                Limpar Formulário
-              </Button>
-            ) : (
-              <Button type='button' disabled>
-                <RiResetLeftLine />
-                Limpar Formulário
-              </Button>
-            )}
-            <div>
-              <Button type='button' disabled={isBackButtonDisabled} onClick={handleBack}>
-                <FaArrowLeft />
-                Voltar
-              </Button>
-              {step === 'basicInfos' && (
-                <Button type='button' onClick={handleContinue} className='nextButton'>
-                  Avançar
-                  <FaArrowRight />
-                </Button>
-              )}
-              {step === 'performanceMetrics' && (
-                <Button type='submit' onClick={handleSendForm} className='nextButton'>
-                  Enviar
-                  <FaArrowRight />
-                </Button>
-              )}
-              {step === 'resultClassification' && (
-                <Button type='button' onClick={handleFinish} className='nextButton'>
-                  <FaCircleCheck />
-                  Concluir
-                </Button>
-              )}
-            </div>
-          </Footer>
+          <Footer
+            step={step}
+            form={!form.dirty}
+            isBackButtonDisabled={isBackButtonDisabled}
+            onReset={handleReset}
+            onBack={handleBack}
+            onContinue={handleContinue}
+            onSubmit={handleSendForm}
+            onFinish={handleFinish}
+          />
         </form>
       </div>
     </Container>
