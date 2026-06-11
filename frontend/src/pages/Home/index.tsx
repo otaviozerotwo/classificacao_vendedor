@@ -17,7 +17,6 @@ import { FaCircleCheck, FaTrophy } from "react-icons/fa6"
 import { TbMoodEmptyFilled } from "react-icons/tb"
 import { PiEmptyBold } from "react-icons/pi"
 import { useFormik } from 'formik'
-import * as Yup from 'yup'
 import type { ClassificationRequest } from '../../interfaces/ClassificationRequest'
 import { classificationApi } from '../../services/api'
 import { cityMap } from '../../constants/cityMap'
@@ -27,6 +26,8 @@ import colors from '../../styles/colors'
 import { useStep } from '../../contexts/StepContext'
 import { IMaskInput } from 'react-imask'
 import { NumericFormat } from 'react-number-format'
+import ErrorMessage from '../../components/ErrorMessage'
+import { classificationSchema } from '../../utils/validationSchema'
 
 const Home = () => {
   const [classificationResult, setClassificationResult] = useState<string>('')
@@ -57,88 +58,7 @@ const Home = () => {
       itemTarget: '',
       itemsSold: ''
     },
-    validationSchema: Yup.object({
-      fullName: Yup.string().min(3, 'O nome precisa ter pelo menos 3 caracteres').required('O campo é obrigatório'),
-      role: Yup.string().required('O campo é obrigatório'),
-      sex: Yup.string().required('O campo é obrigatório'),
-      city: Yup.string().required('O campo é obrigatório'),
-      year: Yup.string().required('O campo é obrigatório'),
-      month: Yup.string().required('O campo é obrigatório'),
-      daysWorked: Yup.string().required('O campo é obrigatório'),
-
-      salesTarget: Yup.string().when((_values, schema) =>
-        step === 'performanceMetrics'
-          ? schema
-              .required('O campo é obrigatório')
-          : schema
-      ),
-      salesCompleted: Yup.string().when((_values, schema) =>
-        step === 'performanceMetrics'
-          ? schema
-              .required('O campo é obrigatório')
-          : schema
-      ),
-      grossMargin: Yup.string().when((_values, schema) =>
-        step === 'performanceMetrics'
-          ? schema
-              .required('O campo é obrigatório')
-          : schema
-      ),
-      salesReturned: Yup.string().when((_values, schema) =>
-        step === 'performanceMetrics'
-          ? schema
-              .required('O campo é obrigatório')
-          : schema
-      ),
-      totalDiscountTarget: Yup.string().when((_values, schema) =>
-        step === 'performanceMetrics'
-          ? schema
-              .required('O campo é obrigatório')
-          : schema
-      ),
-      totalDiscountCompleted: Yup.string().when((_values, schema) =>
-        step === 'performanceMetrics'
-          ? schema
-              .required('O campo é obrigatório')
-          : schema
-      ),
-      budgetDiscountTarget: Yup.string().when((_values, schema) =>
-        step === 'performanceMetrics'
-          ? schema
-              .required('O campo é obrigatório')
-          : schema
-      ),
-      budgetDiscountCompleted: Yup.string().when((_values, schema) =>
-        step === 'performanceMetrics'
-          ? schema
-              .required('O campo é obrigatório')
-          : schema
-      ),
-      customersTarget: Yup.string().when((_values, schema) =>
-        step === 'performanceMetrics'
-          ? schema
-              .required('O campo é obrigatório')
-          : schema
-      ),
-      customersServed: Yup.string().when((_values, schema) =>
-        step === 'performanceMetrics'
-          ? schema
-              .required('O campo é obrigatório')
-          : schema
-      ),
-      itemTarget: Yup.string().when((_values, schema) =>
-        step === 'performanceMetrics'
-          ? schema
-              .required('O campo é obrigatório')
-          : schema
-      ),
-      itemsSold: Yup.string().when((_values, schema) =>
-        step === 'performanceMetrics'
-          ? schema
-              .required('O campo é obrigatório')
-          : schema
-      )
-    }),
+    validationSchema: classificationSchema(step),
     onSubmit: async (values) => {
       try {
         const result = await classificationApi(values)
@@ -605,67 +525,73 @@ const Home = () => {
             </>
           ) : step === 'resultClassification' ? (
             <>
-              <h2>Resultado da Classificação</h2>
-              <p>
-                Análise do desempenho com base nas métricas inseridas.
-              </p>
-              <GridContainer className='gridResult'>
-                {classificationResult === 'Meta Atingida' ? (
-                  <CardResult backgroundColor={colors.green}>
-                    <div className='resultIcon'>
-                      <FaTrophy size={48} color='#FFF' />
-                    </div>
-                    <div className='resultClassification'>
-                      <FaCircleCheck />
-                      <div>
-                        <span>{classificationResult || '-'}</span>
-                      </div>
-                    </div>
-                  </CardResult>
-                ) : (
-                  <CardResult backgroundColor={colors.red}>
-                    <div className='resultIcon'>
-                      <TbMoodEmptyFilled size={48} color='#FFF' />
-                    </div>
-                    <div className='resultClassification'>
-                      <PiEmptyBold />
-                      <div>
-                        <span>{classificationResult || '-'}</span>
-                      </div>
-                    </div>
-                  </CardResult>
-                )}
-                <Card>
-                  <CardTitle><h3>Resumo dos Indicadores e Métricas</h3></CardTitle>
-                  <CardResume>
-                    <div className='gridResume'>
-                      <span>Nome: {form.values.fullName}</span>
-                      <span>Cargo: {roleMap[form.values.role]}</span>
-                      <span>Sexo: {sexMap[form.values.sex]}</span>
-                      <span>Cidade: {cityMap[form.values.city]}</span>
-                      <span>Ano: {form.values.year}</span>
-                      <span>Mês: {form.values.month}</span>
-                    </div>
-                    <div className='gridResume'>
-                      <span>Dias Trabalhados: {form.values.daysWorked}</span>
-                      <span>Meta de Venda: {form.values.salesTarget}</span>
-                      <span>Venda Realizada: {form.values.salesCompleted}</span>
-                      <span>Margem Bruta: {form.values.grossMargin}</span>
-                      <span>Devolução Realizada: {form.values.salesReturned}</span>
-                      <span>Meta de Desconto Total: {form.values.totalDiscountTarget}</span>
-                    </div>
-                    <div className='gridResume'>
-                      <span>Desconto Total Realizado: {form.values.totalDiscountCompleted}</span>
-                      <span>Meta Desconto de Verba: {form.values.budgetDiscountTarget}</span>
-                      <span>Desconto de Verba Realizado: {form.values.budgetDiscountCompleted}</span>
-                      <span>Meta de Clientes: {form.values.customersTarget}</span>
-                      <span>Clientes Atendidos: {form.values.customersServed}</span>
-                      <span>Meta de Itens: {form.values.itemTarget}</span>
-                      <span>Itens Vendidos: {form.values.itemsSold}</span>
-                    </div>
-                  </CardResume>
-                </Card>
-              </GridContainer>
+              {classificationResult !== '' ? (
+                <>
+                  <h2>Resultado da Classificação</h2>
+                  <p>
+                    Análise do desempenho com base nas métricas inseridas.
+                  </p>
+                  <GridContainer className='gridResult'>
+                    {classificationResult === 'Meta Atingida' ? (
+                      <CardResult backgroundColor={colors.green}>
+                        <div className='resultIcon'>
+                          <FaTrophy size={48} color='#FFF' />
+                        </div>
+                        <div className='resultClassification'>
+                          <FaCircleCheck />
+                          <div>
+                            <span>{classificationResult || '-'}</span>
+                          </div>
+                        </div>
+                      </CardResult>
+                    ) : (
+                      <CardResult backgroundColor={colors.red}>
+                        <div className='resultIcon'>
+                          <TbMoodEmptyFilled size={48} color='#FFF' />
+                        </div>
+                        <div className='resultClassification'>
+                          <PiEmptyBold />
+                          <div>
+                            <span>{classificationResult || '-'}</span>
+                          </div>
+                        </div>
+                      </CardResult>
+                    )}
+                    <Card>
+                      <CardTitle><h3>Resumo dos Indicadores e Métricas</h3></CardTitle>
+                      <CardResume>
+                        <div className='gridResume'>
+                          <span>Nome: {form.values.fullName}</span>
+                          <span>Cargo: {roleMap[form.values.role]}</span>
+                          <span>Sexo: {sexMap[form.values.sex]}</span>
+                          <span>Cidade: {cityMap[form.values.city]}</span>
+                          <span>Ano: {form.values.year}</span>
+                          <span>Mês: {form.values.month}</span>
+                        </div>
+                        <div className='gridResume'>
+                          <span>Dias Trabalhados: {form.values.daysWorked}</span>
+                          <span>Meta de Venda: {form.values.salesTarget}</span>
+                          <span>Venda Realizada: {form.values.salesCompleted}</span>
+                          <span>Margem Bruta: {form.values.grossMargin}</span>
+                          <span>Devolução Realizada: {form.values.salesReturned}</span>
+                          <span>Meta de Desconto Total: {form.values.totalDiscountTarget}</span>
+                        </div>
+                        <div className='gridResume'>
+                          <span>Desconto Total Realizado: {form.values.totalDiscountCompleted}</span>
+                          <span>Meta Desconto de Verba: {form.values.budgetDiscountTarget}</span>
+                          <span>Desconto de Verba Realizado: {form.values.budgetDiscountCompleted}</span>
+                          <span>Meta de Clientes: {form.values.customersTarget}</span>
+                          <span>Clientes Atendidos: {form.values.customersServed}</span>
+                          <span>Meta de Itens: {form.values.itemTarget}</span>
+                          <span>Itens Vendidos: {form.values.itemsSold}</span>
+                        </div>
+                      </CardResume>
+                    </Card>
+                  </GridContainer>
+                </>
+              ) : (
+                <ErrorMessage />
+              )}
             </>
           ) : null }
           <Footer>
