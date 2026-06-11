@@ -24,12 +24,13 @@ import { cityMap } from '../../constants/cityMap'
 import { roleMap } from '../../constants/roleMap'
 import { sexMap } from '../../constants/sexMap'
 import colors from '../../styles/colors'
-
-type Step = 'basicInfos' | 'performanceMetrics' | 'resultClassification'
+import { useStep } from '../../contexts/StepContext'
 
 const Home = () => {
-  const [step, setStep] = useState<Step>('basicInfos')
   const [classificationResult, setClassificationResult] = useState<string>('')
+
+  const { step, setStep } = useStep()
+
   const isBackButtonDisabled = step === 'basicInfos'
 
   const form = useFormik<ClassificationRequest>({
