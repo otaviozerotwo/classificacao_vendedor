@@ -1,12 +1,42 @@
-import ErrorMessage from "../ErrorMessage"
-import { cityMap } from "../../../../constants/cityMap"
-import { roleMap } from "../../../../constants/roleMap"
-import { sexMap } from "../../../../constants/sexMap"
-import colors from "../../../../styles/colors"
-import { Card, CardResult, CardResume, CardTitle, GridContainer } from "../../styles"
-import { FaCircleCheck, FaTrophy } from "react-icons/fa6"
-import { TbMoodEmptyFilled } from "react-icons/tb"
-import { PiEmptyBold } from "react-icons/pi"
+import ErrorMessage from '../ErrorMessage'
+import { cityMap } from '../../../../constants/cityMap'
+import { roleMap } from '../../../../constants/roleMap'
+import { sexMap } from '../../../../constants/sexMap'
+import colors from '../../../../styles/colors'
+import {
+  Card,
+  CardResult,
+  CardResume,
+  CardTitle,
+  GridContainer
+} from '../../styles'
+import { FaCircleCheck, FaTrophy, FaUser } from 'react-icons/fa6'
+import { TbMoodEmptyFilled } from 'react-icons/tb'
+import { PiEmptyBold } from 'react-icons/pi'
+import {
+  FiUser,
+  FiBriefcase,
+  FiMapPin,
+  FiCalendar,
+  FiTarget,
+  FiShoppingCart,
+  FiPercent,
+  FiCornerUpLeft,
+  FiTag,
+  FiDollarSign,
+  FiUsers,
+  FiUserCheck,
+  FiPackage,
+  FiShoppingBag
+} from 'react-icons/fi'
+import {
+  IconContainer,
+  Item,
+  ItemContainer,
+  Label,
+  NameBadge,
+  SpanContainer
+} from './styles'
 
 const ResultStep = ({ form, classificationResult }) => {
   return (
@@ -41,45 +71,182 @@ const ResultStep = ({ form, classificationResult }) => {
                 </div>
               </CardResult>
             )}
-            <Card>
+            <Card style={{ alignSelf: 'start', minHeight: '420px' }}>
               <CardTitle>
                 <h3>Resumo dos Indicadores e Métricas</h3>
+                <NameBadge>
+                  <FaUser size={14} />
+                  <span>{form.values.fullName}</span>
+                </NameBadge>
               </CardTitle>
               <CardResume>
                 <div className="gridResume">
-                  <span>Nome: {form.values.fullName}</span>
-                  <span>Cargo: {roleMap[form.values.role]}</span>
-                  <span>Sexo: {sexMap[form.values.sex]}</span>
-                  <span>Cidade: {cityMap[form.values.city]}</span>
-                  <span>Ano: {form.values.year}</span>
-                  <span>Mês: {form.values.month}</span>
+                  <ItemContainer>
+                    <IconContainer>
+                      <FiBriefcase size={20} />
+                    </IconContainer>
+                    <SpanContainer>
+                      <Label>Cargo</Label>
+                      <Item>{roleMap[form.values.role]}</Item>
+                    </SpanContainer>
+                  </ItemContainer>
+                  <ItemContainer>
+                    <IconContainer>
+                      <FiUser size={20} />
+                    </IconContainer>
+                    <SpanContainer>
+                      <Label>Sexo</Label>
+                      <Item>{sexMap[form.values.sex]}</Item>
+                    </SpanContainer>
+                  </ItemContainer>
+                  <ItemContainer>
+                    <IconContainer>
+                      <FiMapPin size={20} />
+                    </IconContainer>
+                    <SpanContainer>
+                      <Label>Cidade</Label>
+                      <Item>{cityMap[form.values.city]}</Item>
+                    </SpanContainer>
+                  </ItemContainer>
+                  <ItemContainer>
+                    <IconContainer>
+                      <FiCalendar size={20} />
+                    </IconContainer>
+                    <SpanContainer>
+                      <Label>Ano</Label>
+                      <Item>{form.values.year}</Item>
+                    </SpanContainer>
+                  </ItemContainer>
+                  <ItemContainer>
+                    <IconContainer>
+                      <FiCalendar size={20} />
+                    </IconContainer>
+                    <SpanContainer>
+                      <Label>Mês</Label>
+                      <Item>{form.values.month}</Item>
+                    </SpanContainer>
+                  </ItemContainer>
+                  <ItemContainer>
+                    <IconContainer>
+                      <FiCalendar size={20} />
+                    </IconContainer>
+                    <SpanContainer>
+                      <Label>Dias Trabalhados</Label>
+                      <Item>{form.values.daysWorked}</Item>
+                    </SpanContainer>
+                  </ItemContainer>
                 </div>
                 <div className="gridResume">
-                  <span>Dias Trabalhados: {form.values.daysWorked}</span>
-                  <span>Meta de Venda: {form.values.salesTarget}</span>
-                  <span>Venda Realizada: {form.values.salesCompleted}</span>
-                  <span>Margem Bruta: {form.values.grossMargin}</span>
-                  <span>Devolução Realizada: {form.values.salesReturned}</span>
-                  <span>
-                    Meta de Desconto Total: {form.values.totalDiscountTarget}
-                  </span>
+                  <ItemContainer>
+                    <IconContainer>
+                      <FiTarget size={20} />
+                    </IconContainer>
+                    <SpanContainer>
+                      <Label>Meta de Venda</Label>
+                      <Item>{form.values.salesTarget}</Item>
+                    </SpanContainer>
+                  </ItemContainer>
+                  <ItemContainer>
+                    <IconContainer>
+                      <FiShoppingCart size={20} />
+                    </IconContainer>
+                    <SpanContainer>
+                      <Label>Venda Realizada</Label>
+                      <Item>{form.values.salesCompleted}</Item>
+                    </SpanContainer>
+                  </ItemContainer>
+                  <ItemContainer>
+                    <IconContainer>
+                      <FiPercent size={20} />
+                    </IconContainer>
+                    <SpanContainer>
+                      <Label>Margem Bruta</Label>
+                      <Item>{form.values.grossMargin}</Item>
+                    </SpanContainer>
+                  </ItemContainer>
+                  <ItemContainer>
+                    <IconContainer>
+                      <FiCornerUpLeft size={20} />
+                    </IconContainer>
+                    <SpanContainer>
+                      <Label>Devolução Realizada</Label>
+                      <Item>{form.values.salesReturned}</Item>
+                    </SpanContainer>
+                  </ItemContainer>
+                  <ItemContainer>
+                    <IconContainer>
+                      <FiTag size={20} />
+                    </IconContainer>
+                    <SpanContainer>
+                      <Label>Meta de Desconto Total</Label>
+                      <Item>{form.values.totalDiscountTarget}</Item>
+                    </SpanContainer>
+                  </ItemContainer>
+                  <ItemContainer>
+                    <IconContainer>
+                      <FiTag size={20} />
+                    </IconContainer>
+                    <SpanContainer>
+                      <Label>Desconto Total Realizado</Label>
+                      <Item>{form.values.totalDiscountCompleted}</Item>
+                    </SpanContainer>
+                  </ItemContainer>
                 </div>
                 <div className="gridResume">
-                  <span>
-                    Desconto Total Realizado:{' '}
-                    {form.values.totalDiscountCompleted}
-                  </span>
-                  <span>
-                    Meta Desconto de Verba: {form.values.budgetDiscountTarget}
-                  </span>
-                  <span>
-                    Desconto de Verba Realizado:{' '}
-                    {form.values.budgetDiscountCompleted}
-                  </span>
-                  <span>Meta de Clientes: {form.values.customersTarget}</span>
-                  <span>Clientes Atendidos: {form.values.customersServed}</span>
-                  <span>Meta de Itens: {form.values.itemTarget}</span>
-                  <span>Itens Vendidos: {form.values.itemsSold}</span>
+                  <ItemContainer>
+                    <IconContainer>
+                      <FiDollarSign size={20} />
+                    </IconContainer>
+                    <SpanContainer>
+                      <Label>Meta Desconto de Verba</Label>
+                      <Item>{form.values.budgetDiscountTarget}</Item>
+                    </SpanContainer>
+                  </ItemContainer>
+                  <ItemContainer>
+                    <IconContainer>
+                      <FiDollarSign size={20} />
+                    </IconContainer>
+                    <SpanContainer>
+                      <Label>Desconto de Verba Realizado</Label>
+                      <Item>{form.values.budgetDiscountCompleted}</Item>
+                    </SpanContainer>
+                  </ItemContainer>
+                  <ItemContainer>
+                    <IconContainer>
+                      <FiUsers size={20} />
+                    </IconContainer>
+                    <SpanContainer>
+                      <Label>Meta de Clientes</Label>
+                      <Item>{form.values.customersTarget}</Item>
+                    </SpanContainer>
+                  </ItemContainer>
+                  <ItemContainer>
+                    <IconContainer>
+                      <FiUserCheck size={20} />
+                    </IconContainer>
+                    <SpanContainer>
+                      <Label>Clientes Atendido</Label>
+                      <Item>{form.values.customersServed}</Item>
+                    </SpanContainer>
+                  </ItemContainer>
+                  <ItemContainer>
+                    <IconContainer>
+                      <FiPackage size={20} />
+                    </IconContainer>
+                    <SpanContainer>
+                      <Label>Meta de Itens</Label>
+                      <Item>{form.values.itemTarget}</Item>
+                    </SpanContainer>
+                  </ItemContainer>
+                  <ItemContainer>
+                    <IconContainer>
+                      <FiShoppingBag size={20} />
+                    </IconContainer>
+                    <SpanContainer>
+                      <Label>Itens Vendidos</Label>
+                      <Item>{form.values.itemsSold}</Item>
+                    </SpanContainer>
+                  </ItemContainer>
                 </div>
               </CardResume>
             </Card>

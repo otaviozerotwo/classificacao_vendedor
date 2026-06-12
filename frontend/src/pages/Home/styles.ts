@@ -26,6 +26,7 @@ export const GridContainer = styled.div`
 
   &.gridResult {
     grid-template-columns: 1fr 2fr;
+    align-items: start;
   }
 `
 
@@ -37,6 +38,7 @@ export const Card = styled.div`
   margin-bottom: 24px;
   background-color: ${colors.white};
   box-shadow: 1px 1px 2px ${colors.powderBlue};
+  overflow-y: auto;
 `
 
 export const CardTitle = styled.div`
@@ -44,6 +46,9 @@ export const CardTitle = styled.div`
   margin-bottom: 14px;
   border-bottom: 1px solid ${colors.powderBlue};
   background-color: ${colors.white};
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
   h3 {
     font-size: 16px;
@@ -92,6 +97,7 @@ export const CardResult = styled.div<CardResultProps>`
   margin-bottom: 24px;
   background-color: ${(props) => props.backgroundColor};
   color: ${colors.white};
+  height: 324px;
 
   .resultIcon {
     border-radius: 50%;
