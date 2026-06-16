@@ -1,7 +1,8 @@
 import { NumericFormat } from "react-number-format"
 import { Card, CardTitle, InputGroup, Row } from "../../styles"
+import type { FormProps } from "../../../../interfaces/FormProps"
 
-const SalesPermanceCard = ({ form }) => (
+const SalesPermanceCard = ({ form }: FormProps) => (
   <>
     <Card>
       <CardTitle>

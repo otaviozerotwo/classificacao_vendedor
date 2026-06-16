@@ -1,6 +1,7 @@
+import type { FormProps } from "../../../../interfaces/FormProps";
 import { Card, CardTitle, InputGroup } from "../../styles";
 
-const LocationCard = ({ form }) => (
+const LocationCard = ({ form }: FormProps) => (
   <>
     <Card>
       <CardTitle>

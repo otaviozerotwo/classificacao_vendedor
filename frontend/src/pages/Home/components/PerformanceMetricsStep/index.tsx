@@ -2,8 +2,10 @@ import { GridContainer } from "../../styles"
 import SalesPermanceCard from "../cards/SalesPerformanceCard"
 import DiscountsCard from "../cards/DiscountsCard"
 import ProductivityCard from "../cards/ProductivityCard"
+import type { FormProps } from "../../../../interfaces/FormProps"
 
-const PerformanceMetricsStep = ({ form }) => {
+
+const PerformanceMetricsStep = ({ form }: FormProps) => {
   return (
     <>
       <h2>Métricas de Desempenho</h2>

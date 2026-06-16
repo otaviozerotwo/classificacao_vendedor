@@ -37,8 +37,13 @@ import {
   NameBadge,
   SpanContainer
 } from './styles'
+import type { FormProps } from '../../../../interfaces/FormProps'
 
-const ResultStep = ({ form, classificationResult }) => {
+interface ResultStepProps extends FormProps {
+  classificationResult: string
+}
+
+const ResultStep = ({ form, classificationResult }: ResultStepProps) => {
   return (
     <>
       {classificationResult !== '' ? (

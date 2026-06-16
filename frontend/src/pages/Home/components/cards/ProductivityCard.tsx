@@ -1,7 +1,8 @@
 import { IMaskInput } from "react-imask"
 import { Card, CardTitle, InputGroup, Row } from "../../styles"
+import type { FormProps } from "../../../../interfaces/FormProps"
 
-const ProductivityCard = ({ form }) => (
+const ProductivityCard = ({ form }: FormProps) => (
   <>
     <Card>
       <CardTitle>

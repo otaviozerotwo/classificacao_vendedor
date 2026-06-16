@@ -1,0 +1,21 @@
+export interface FormValues {
+  fullName: string,
+  role: string,
+  sex: string,
+  city: string,
+  year: string,
+  month: string,
+  daysWorked: string,
+  salesTarget: string,
+  salesCompleted: string,
+  grossMargin: string,
+  salesReturned: string,
+  totalDiscountTarget: string,
+  totalDiscountCompleted: string,
+  budgetDiscountTarget: string,
+  budgetDiscountCompleted: string,
+  customersTarget: string,
+  customersServed: string,
+  itemTarget: string,
+  itemsSold: string
+}

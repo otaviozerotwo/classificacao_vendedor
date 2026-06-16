@@ -1,9 +1,10 @@
+import type { FormProps } from "../../../../interfaces/FormProps"
 import { GridContainer } from "../../styles"
 import IdentificationCard from "../cards/IdentificationCard"
 import LocationCard from "../cards/LocationCard"
 import PeriodCard from "../cards/PeriodCard"
 
-const BasicInfosStep = ({ form }) => {
+const BasicInfosStep = ({ form }: FormProps) => {
   return (
     <>
       <h2>Informações Básicas do Vendedor</h2>

@@ -1,7 +1,8 @@
 import { IMaskInput } from "react-imask";
 import { Card, CardTitle, InputGroup, Row } from "../../styles";
+import type { FormProps } from "../../../../interfaces/FormProps";
 
-const PeriodCard = ({ form }) => (
+const PeriodCard = ({ form }: FormProps) => (
   <>
     <Card>
       <CardTitle>
