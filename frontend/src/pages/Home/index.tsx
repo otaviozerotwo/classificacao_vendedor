@@ -3,10 +3,11 @@ import BasicInfosStep from './components/BasicInfosStep'
 import PerformanceMetricsStep from './components/PerformanceMetricsStep'
 import ResultStep from './components/ResultStep'
 import Footer from './components/Footer'
-import { Container } from './styles'
+import { Container, LoaderContainer } from './styles'
+import { BeatLoader } from 'react-spinners'
 
 const Home = () => {
-  const { form, step, classificationResult, handleContinue, handleBack, handleReset, handleSendForm, handleFinish } = useClassificationForm()
+  const { form, step, classificationResult, loading, handleContinue, handleBack, handleReset, handleSendForm, handleFinish } = useClassificationForm()
 
   const isBackButtonDisabled = step === 'basicInfos'
 
@@ -23,7 +24,13 @@ const Home = () => {
           )}
 
           {step === 'resultClassification' && (
-            <ResultStep form={form} classificationResult={classificationResult} />
+            loading ? (
+              <LoaderContainer>
+                <BeatLoader />
+              </LoaderContainer>
+            ) : (
+              <ResultStep form={form} classificationResult={classificationResult} loading={loading}/>
+            )
           )}
 
           <Footer

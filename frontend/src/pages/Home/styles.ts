@@ -130,3 +130,10 @@ export const CardResume = styled.div`
     font-size: 14px;
   }
 `
+
+export const LoaderContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+`

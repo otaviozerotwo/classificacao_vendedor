@@ -41,6 +41,7 @@ import type { FormProps } from '../../../../interfaces/FormProps'
 
 interface ResultStepProps extends FormProps {
   classificationResult: string
+  loading: boolean
 }
 
 const ResultStep = ({ form, classificationResult }: ResultStepProps) => {

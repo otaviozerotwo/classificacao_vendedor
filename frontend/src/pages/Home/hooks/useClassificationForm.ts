@@ -6,6 +6,7 @@ import { classificationApi } from '../../../services/api'
 import type { ClassificationRequest } from '../../../interfaces/ClassificationRequest'
 
 export const useClassificationForm = () => {
+  const [loading, setLoading] = useState(false)
   const [classificationResult, setClassificationResult] = useState<string>('')
 
   const { step, setStep } = useStep()
@@ -34,6 +35,8 @@ export const useClassificationForm = () => {
     },
     validationSchema: classificationSchema(step),
     onSubmit: async (values) => {
+      setLoading(true)
+
       try {
         const result = await classificationApi(values)
 
@@ -42,6 +45,8 @@ export const useClassificationForm = () => {
         console.log(result)
       } catch (error) {
         console.error(error)
+      } finally {
+        setLoading(false)
       }
     }
   })
@@ -118,6 +123,7 @@ export const useClassificationForm = () => {
     form,
     step,
     classificationResult,
+    loading,
     handleContinue,
     handleBack,
     handleReset,
