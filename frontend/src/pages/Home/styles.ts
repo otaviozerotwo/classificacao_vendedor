@@ -18,6 +18,16 @@ export const Container = styled.div`
   }
 `
 
+export const StepContainer = styled.div`
+  padding: 0px 24px;
+
+  @media (max-width: 1024px) {
+    h2, p {
+      text-align: center;
+    }
+  }
+`
+
 export const GridContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -27,6 +37,11 @@ export const GridContainer = styled.div`
   &.gridResult {
     grid-template-columns: 1fr 2fr;
     align-items: start;
+  }
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+    padding: 0px 64px;
   }
 `
 
