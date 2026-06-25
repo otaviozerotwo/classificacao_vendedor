@@ -12,6 +12,10 @@ export const Container = styled.footer`
     display: flex;
     gap: 12px;
   }
+
+  @media (max-width: 1024px) {
+    padding: 0px 24px;
+  }
 `
 
 export const Button = styled.button`
