@@ -42,6 +42,11 @@ export const GridContainer = styled.div`
   @media (max-width: 1024px) {
     grid-template-columns: 1fr;
     padding: 0px 64px;
+
+    &.gridResult {
+      grid-template-columns: 1fr;
+      padding: 0px 64px;
+    }
   }
 `
 
@@ -130,6 +135,14 @@ export const CardResult = styled.div<CardResultProps>`
     font-size: 28px;
     font-weight: bold;
     text-transform: uppercase;
+  }
+
+  @media (max-width: 1024px) {
+    margin: 0px 54px;
+
+    .resultClassification {
+      font-size: 22px;
+    }
   }
 `
 

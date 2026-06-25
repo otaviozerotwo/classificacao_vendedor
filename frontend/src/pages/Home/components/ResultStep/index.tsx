@@ -8,7 +8,8 @@ import {
   CardResult,
   CardResume,
   CardTitle,
-  GridContainer
+  GridContainer,
+  StepContainer
 } from '../../styles'
 import { FaCircleCheck, FaTrophy, FaUser } from 'react-icons/fa6'
 import { TbMoodEmptyFilled } from 'react-icons/tb'
@@ -48,7 +49,7 @@ const ResultStep = ({ form, classificationResult }: ResultStepProps) => {
   return (
     <>
       {classificationResult !== '' ? (
-        <>
+        <StepContainer>
           <h2>Resultado da Classificação</h2>
           <p>Análise do desempenho com base nas métricas inseridas.</p>
           <GridContainer className="gridResult">
@@ -257,7 +258,7 @@ const ResultStep = ({ form, classificationResult }: ResultStepProps) => {
               </CardResume>
             </Card>
           </GridContainer>
-        </>
+        </StepContainer>
       ) : (
         <ErrorMessage />
       )}
