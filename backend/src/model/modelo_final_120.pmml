@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PMML version="4.2" xmlns="http://www.dmg.org/PMML-4_2">
+  <Header copyright="Otavio">
+    <Application name="KNIME" version="5.12.0"/>
+  </Header>
+  <DataDictionary numberOfFields="6">
+    <DataField name="atingimento_meta" optype="continuous" dataType="double">
+      <Interval closure="closedClosed" leftMargin="0.5519000263172585" rightMargin="1.68725871648652"/>
+    </DataField>
+    <DataField name="vendas_por_dia" optype="continuous" dataType="double">
+      <Interval closure="closedClosed" leftMargin="1088.8870000000002" rightMargin="5176.987619047619"/>
+    </DataField>
+    <DataField name="atendimentos_por_dia" optype="continuous" dataType="double">
+      <Interval closure="closedClosed" leftMargin="11.181818181818182" rightMargin="66.23809523809524"/>
+    </DataField>
+    <DataField name="itens_por_atendimento" optype="continuous" dataType="double">
+      <Interval closure="closedClosed" leftMargin="1.6153005464480874" rightMargin="3.5245901639344264"/>
+    </DataField>
+    <DataField name="media_atingimento_3m" optype="continuous" dataType="double">
+      <Interval closure="closedClosed" leftMargin="0.6221303487148909" rightMargin="1.5175596205253212"/>
+    </DataField>
+    <DataField name="atingiu_meta_mes_seguinte" optype="categorical" dataType="string">
+      <Value value="Atingiu"/>
+      <Value value="Nao_atingiu"/>
+    </DataField>
+  </DataDictionary>
+  <TreeModel modelName="DecisionTree" functionName="classification" splitCharacteristic="binarySplit" missingValueStrategy="lastPrediction" noTrueChildStrategy="returnNullPrediction">
+    <MiningSchema>
+      <MiningField name="atingimento_meta" invalidValueTreatment="asIs"/>
+      <MiningField name="vendas_por_dia" invalidValueTreatment="asIs"/>
+      <MiningField name="atendimentos_por_dia" invalidValueTreatment="asIs"/>
+      <MiningField name="itens_por_atendimento" invalidValueTreatment="asIs"/>
+      <MiningField name="media_atingimento_3m" invalidValueTreatment="asIs"/>
+      <MiningField name="atingiu_meta_mes_seguinte" invalidValueTreatment="asIs" usageType="target"/>
+    </MiningSchema>
+    <Node id="0" score="Nao_atingiu" recordCount="1500.0">
+      <True/>
+      <ScoreDistribution value="Atingiu" recordCount="644.0"/>
+      <ScoreDistribution value="Nao_atingiu" recordCount="856.0"/>
+      <Node id="1" score="Nao_atingiu" recordCount="883.0">
+        <SimplePredicate field="media_atingimento_3m" operator="lessOrEqual" value="1.0130836897874627"/>
+        <ScoreDistribution value="Atingiu" recordCount="238.0"/>
+        <ScoreDistribution value="Nao_atingiu" recordCount="645.0"/>
+        <Node id="2" score="Nao_atingiu" recordCount="308.0">
+          <SimplePredicate field="media_atingimento_3m" operator="lessOrEqual" value="0.8638727036272665"/>
+          <ScoreDistribution value="Atingiu" recordCount="38.0"/>
+          <ScoreDistribution value="Nao_atingiu" recordCount="270.0"/>
+          <Node id="3" score="Nao_atingiu" recordCount="184.0">
+            <SimplePredicate field="vendas_por_dia" operator="lessOrEqual" value="2225.440594965675"/>
+            <ScoreDistribution value="Atingiu" recordCount="13.0"/>
+            <ScoreDistribution value="Nao_atingiu" recordCount="171.0"/>
+          </Node>
+          <Node id="4" score="Nao_atingiu" recordCount="124.0">
+            <SimplePredicate field="vendas_por_dia" operator="greaterThan" value="2225.440594965675"/>
+            <ScoreDistribution value="Atingiu" recordCount="25.0"/>
+            <ScoreDistribution value="Nao_atingiu" recordCount="99.0"/>
+          </Node>
+        </Node>
+        <Node id="5" score="Nao_atingiu" recordCount="575.0">
+          <SimplePredicate field="media_atingimento_3m" operator="greaterThan" value="0.8638727036272665"/>
+          <ScoreDistribution value="Atingiu" recordCount="200.0"/>
+          <ScoreDistribution value="Nao_atingiu" recordCount="375.0"/>
+          <Node id="6" score="Nao_atingiu" recordCount="344.0">
+            <SimplePredicate field="atendimentos_por_dia" operator="lessOrEqual" value="26.804761904761904"/>
+            <ScoreDistribution value="Atingiu" recordCount="98.0"/>
+            <ScoreDistribution value="Nao_atingiu" recordCount="246.0"/>
+            <Node id="7" score="Nao_atingiu" recordCount="180.0">
+              <SimplePredicate field="media_atingimento_3m" operator="lessOrEqual" value="0.940068768944747"/>
+              <ScoreDistribution value="Atingiu" recordCount="43.0"/>
+              <ScoreDistribution value="Nao_atingiu" recordCount="137.0"/>
+            </Node>
+            <Node id="8" score="Nao_atingiu" recordCount="164.0">
+              <SimplePredicate field="media_atingimento_3m" operator="greaterThan" value="0.940068768944747"/>
+              <ScoreDistribution value="Atingiu" recordCount="55.0"/>
+              <ScoreDistribution value="Nao_atingiu" recordCount="109.0"/>
+            </Node>
+          </Node>
+          <Node id="9" score="Nao_atingiu" recordCount="231.0">
+            <SimplePredicate field="atendimentos_por_dia" operator="greaterThan" value="26.804761904761904"/>
+            <ScoreDistribution value="Atingiu" recordCount="102.0"/>
+            <ScoreDistribution value="Nao_atingiu" recordCount="129.0"/>
+          </Node>
+        </Node>
+      </Node>
+      <Node id="10" score="Atingiu" recordCount="617.0">
+        <SimplePredicate field="media_atingimento_3m" operator="greaterThan" value="1.0130836897874627"/>
+        <ScoreDistribution value="Atingiu" recordCount="406.0"/>
+        <ScoreDistribution value="Nao_atingiu" recordCount="211.0"/>
+        <Node id="11" score="Atingiu" recordCount="421.0">
+          <SimplePredicate field="atingimento_meta" operator="lessOrEqual" value="1.1921030679674893"/>
+          <ScoreDistribution value="Atingiu" recordCount="252.0"/>
+          <ScoreDistribution value="Nao_atingiu" recordCount="169.0"/>
+          <Node id="12" score="Atingiu" recordCount="182.0">
+            <SimplePredicate field="media_atingimento_3m" operator="lessOrEqual" value="1.0672113707365831"/>
+            <ScoreDistribution value="Atingiu" recordCount="93.0"/>
+            <ScoreDistribution value="Nao_atingiu" recordCount="89.0"/>
+          </Node>
+          <Node id="13" score="Atingiu" recordCount="239.0">
+            <SimplePredicate field="media_atingimento_3m" operator="greaterThan" value="1.0672113707365831"/>
+            <ScoreDistribution value="Atingiu" recordCount="159.0"/>
+            <ScoreDistribution value="Nao_atingiu" recordCount="80.0"/>
+          </Node>
+        </Node>
+        <Node id="14" score="Atingiu" recordCount="196.0">
+          <SimplePredicate field="atingimento_meta" operator="greaterThan" value="1.1921030679674893"/>
+          <ScoreDistribution value="Atingiu" recordCount="154.0"/>
+          <ScoreDistribution value="Nao_atingiu" recordCount="42.0"/>
+        </Node>
+      </Node>
+    </Node>
+  </TreeModel>
+</PMML>
