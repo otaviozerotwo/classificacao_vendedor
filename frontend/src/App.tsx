@@ -105,8 +105,7 @@ export default function App() {
   return (
     <>
       <header>
-        <span className="brand">ADS · TCC</span>
-        <span>Árvore de decisão + aplicação web</span>
+        <span className="brand">Classificador de Vendedores</span>
       </header>
       <main>
         <div className="intro">
