@@ -16,7 +16,8 @@ const names: Record<string, string> = {
   itens_por_atendimento: 'Itens por atendimento'
 }
 
-function monthLabel(value: string, offset = 0) {
+function monthLabel(value: string | undefined, offset = 0) {
+  if (!value) return 'Mês'
   const [y, m] = value.split('-').map(Number)
   if (!y || !m) return 'Mês'
   return new Intl.DateTimeFormat('pt-BR', {
@@ -76,6 +77,10 @@ export default function App() {
 
       if (!response.ok)
         throw new Error(data.message || 'Erro ao gerar a previsão.')
+
+      if (!data.prediction || !data.targetMonth || !data.indicators)
+        throw new Error('Resposta inesperada da API.')
+
       setResult(data)
     } catch (e) {
       setError(
