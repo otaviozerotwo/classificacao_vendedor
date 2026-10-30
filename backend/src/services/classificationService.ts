@@ -1,4 +1,4 @@
-import { model } from '~/model/model.js';
+import { model } from '../model/model.js';
 
 export const features = [
   'atingimento_meta',

@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express'
-import { classify, InputError } from '~/services/classificationService.js'
+import { classify, InputError } from '../services/classificationService.js'
 
 export const ClassificationController = (req: Request, res: Response) => {
   try {
