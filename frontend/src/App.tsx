@@ -55,7 +55,7 @@ export default function App() {
 
     try {
       const response = await fetch(
-        import.meta.env.VITE_API_URL,
+        import.meta.env.VITE_API_URL ?? '/api/v1',
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
